@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090c12" />
+  <meta name="description" content="Dossier officiel du Site-95 — Complexe Souterrain de Confinement et de Recherche Cryo-Anomalique 95." />
+  <title>SITE-95 // DOSSIER DE COMMANDEMENT</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="scp-mark">SCP</div>
+      <div>
+        <strong>FOUNDATION</strong>
+        <span>COMMAND TERMINAL</span>
+      </div>
+    </div>
+
+    <div class="access-card">
+      <div class="status-dot"></div>
+      <div>
+        <small>SESSION</small>
+        <b>NIVEAU 4+</b>
+      </div>
+      <span class="access-lock">●</span>
+    </div>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#overview" class="nav-link active"><span>01</span> Aperçu</a>
+      <a href="#clearances" class="nav-link"><span>02</span> Accréditations</a>
+      <a href="#departments" class="nav-link"><span>03</span> Départements</a>
+      <a href="#factions" class="nav-link"><span>04</span> Factions</a>
+      <a href="#levels" class="nav-link"><span>05</span> Niveaux du site</a>
+      <a href="#alerts" class="nav-link"><span>06</span> Protocoles</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span>DOCUMENT OFFICIEL</span>
+      <span>CLASSIFICATION : RESTREINTE</span>
+      <span>ISD MONITORING : ACTIVE</span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir la navigation">☰</button>
+      <div class="breadcrumb">SITE-95 <span>/</span> COMMANDMENT DOSSIER <span>/</span> <b>LEVEL 4</b></div>
+      <div class="top-actions">
+        <div class="signal"><span></span> LIEN SÉCURISÉ</div>
+        <button class="ghost-btn" id="printBtn">IMPRIMER</button>
+      </div>
+    </header>
+
+    <section class="hero" id="overview">
+      <div class="hero-copy">
+        <div class="classification"><span></span> DOCUMENT DE COMMANDEMENT — NIVEAU 4</div>
+        <p class="kicker">COMPLEXE SOUTERRAIN DE CONFINEMENT &amp; RECHERCHE</p>
+        <h1>SITE-95</h1>
+        <p class="hero-subtitle">CRYO-ANOMALIQUE // TOMSK // FÉDÉRATION DE RUSSIE</p>
+        <p class="hero-text">Forteresse souterraine spécialisée dans le confinement d'anomalies cryogéniques, d'entités humanoïdes à haut risque et l'étude de la paratechnologie soviétique issue de la Division « P » du GRU.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#departments">Explorer la structure <span>→</span></a>
+          <a class="btn secondary" href="#alerts">Consulter les urgences</a>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="radar">
+          <div class="radar-ring r1"></div>
+          <div class="radar-ring r2"></div>
+          <div class="radar-ring r3"></div>
+          <div class="radar-sweep"></div>
+          <div class="radar-center"></div>
+          <div class="radar-label label-a">BOREAL-9</div>
+          <div class="radar-label label-b">S-1</div>
+          <div class="radar-label label-c">S-2</div>
+        </div>
+        <div class="hero-stats">
+          <div><b>−50°C</b><span>ZONE CRYO</span></div>
+          <div><b>3</b><span>NIVEAUX</span></div>
+          <div><b>4</b><span>ACCÈS MAX SITE</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-grid facts-grid">
+      <article class="fact-card accent-red">
+        <span class="fact-label">DIRECTION DU SITE</span>
+        <strong>Dr. Alexander Vance</strong>
+        <p>Site Director · Accréditation Niveau 4</p>
+      </article>
+      <article class="fact-card">
+        <span class="fact-label">FAÇADE CIVILE</span>
+        <strong>Boreal-9</strong>
+        <p>Station d'observation météorologique et géophysique russe</p>
+      </article>
+      <article class="fact-card">
+        <span class="fact-label">SITE ADJACENT</span>
+        <strong>Site-01 // Overwatch Command</strong>
+        <p>Résidence O5 et siège central de RAISA, relié par le Sas Alpha-1</p>
+      </article>
+      <article class="fact-card">
+        <span class="fact-label">ORIGINE</span>
+        <strong>Début des années 1990</strong>
+        <p>Ancien complexe souterrain de la Division « P » du GRU</p>
+      </article>
+    </section>
+
+    <section class="content-section" id="clearances">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">02 // CONTRÔLE D'ACCÈS</span>
+          <h2>Accréditations &amp; personnel</h2>
+        </div>
+        <p>La circulation dans le Site-95 dépend du niveau de sécurité et de la fonction du personnel.</p>
+      </div>
+
+      <div class="clearance-table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr><th>Niveau</th><th>Désignation</th><th>Personnel / accès</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="level-chip l0">00</span></td><td>Unrestricted</td><td>Façade civile · maintenance générale · station météo</td></tr>
+            <tr><td><span class="level-chip l1">01</span></td><td>Restricted</td><td>Recrues, cadets SD, stagiaires · connaissance des anomalies</td></tr>
+            <tr><td><span class="level-chip l2">02</span></td><td>Confidential</td><td>Gardes, chercheurs juniors, médecins, techniciens · Safe / Euclid</td></tr>
+            <tr><td><span class="level-chip l3">03</span></td><td>Secret</td><td>Chercheurs seniors, capitaines SD, commandants FIM, agents d'élite · Keter / opérations tactiques</td></tr>
+            <tr><td><span class="level-chip l4">04</span></td><td>Top Secret</td><td>Chefs de département, directeurs adjoints, directeur du site</td></tr>
+            <tr><td><span class="level-chip l5">05–06</span></td><td>Cosmic Top Secret</td><td>Conseil O5, Comité d'Éthique, haute direction RAISA · accès total</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="personnel-grid">
+        <article class="mini-card"><b>Classe-D</b><span>Sujets d'expérimentation</span></article>
+        <article class="mini-card"><b>Classe-C</b><span>Personnel opérationnel standard</span></article>
+        <article class="mini-card"><b>Classe-B</b><span>Personnel stratégique à évacuer en priorité</span></article>
+        <article class="mini-card"><b>Classe-A</b><span>Personnel vital du site / O5</span></article>
+        <article class="mini-card"><b>Classe-O</b><span>Réservé au Conseil O5</span></article>
+      </div>
+    </section>
+
+    <section class="content-section" id="departments">
+      <div class="section-heading split">
+        <div>
+          <span class="eyebrow">03 // STRUCTURE INTERNE</span>
+          <h2>Départements &amp; équipes</h2>
+        </div>
+        <div class="search-box">
+          <span>⌕</span><input id="deptSearch" type="search" placeholder="Rechercher un département..." autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="command-tree">
+        <div class="tree-node top">CONSEIL O5 / COMITÉ D'ÉTHIQUE (EC)</div>
+        <div class="tree-line"></div>
+        <div class="tree-node director">DIRECTION DU SITE-95 <span>Dr. Alexander Vance</span></div>
+        <div class="tree-children">
+          <div>AD</div><div>SD</div><div>ScD</div><div>MD</div><div>ISD / IA</div><div>FIM / MTF</div><div>CDC</div>
+        </div>
+      </div>
+
+      <div class="department-grid" id="departmentGrid">
+        <article class="dept-card" data-search="administratif ad administration budget direction manager">
+          <div class="dept-icon">AD</div><div class="dept-tag">NIVEAU 3–4+</div><h3>Département Administratif</h3><p>Direction générale, budget, coordination des départements et application des politiques O5.</p><div class="location">▣ Aile Administrative · S-1</div><details><summary>Hiérarchie</summary><p>Junior Manager → Manager → Senior Manager → Site Assistant Manager → Site Manager → Site Senior Manager → <b>Site Director</b></p></details></article>
+        <article class="dept-card" data-search="securité sécurité sd gardes armurerie classe d ligne rouge">
+          <div class="dept-icon">SD</div><div class="dept-tag">NIVEAU 1–4</div><h3>Département de Sécurité</h3><p>Protection interne, CDC, Ligne Rouge, escortes armées et répression des émeutes.</p><div class="location">▣ Poste de Garde Principal &amp; Armurerie · S-1</div><details><summary>Hiérarchie</summary><p>Cadet → Private → Corporal → Sergeant → Staff Sergeant → Lieutenant → Captain → Major → Colonel → <b>General / Chief of Security</b></p></details></article>
+        <article class="dept-card" data-search="scientifique science scd chercheur laboratoire gr u p anomalies paratechnologie">
+          <div class="dept-icon">ScD</div><div class="dept-tag">NIVEAU 1–4</div><h3>Département Scientifique</h3><p>Analyse et expérimentation des anomalies, PPC et étude de la paratechnologie soviétique.</p><div class="location">▣ Labos A/B/C &amp; Archives GRU-P · S-1</div><details><summary>Hiérarchie</summary><p>Intern → Trainee Researcher → Junior Researcher → Researcher → Senior Researcher → Head Researcher → Assistant Board Director → <b>Board Director</b></p></details></article>
+        <article class="dept-card" data-search="medical md médecin infirmier chirurgie decontamination amnésiques">
+          <div class="dept-icon">MD</div><div class="dept-tag">NIVEAU 2–4</div><h3>Département Médical</h3><p>Urgences, bloc opératoire, suivi, décontamination biologique, vaccins et administration des amnésiques.</p><div class="location">▣ Infirmerie Centrale · S-1</div><details><summary>Hiérarchie</summary><p>Intern → Junior Resident → Resident → Senior Resident → Chief Resident → Fellow → Attending Physician → Department Head → <b>Medical Director</b></p></details></article>
+        <article class="dept-card" data-search="fims mtf forces intervention mobiles tactique winter wonderland maz hatters hammer down nine tailed fox alpha red right hand">
+          <div class="dept-icon">FIM</div><div class="dept-tag">NIVEAU 2–5</div><h3>Forces d'Intervention Mobiles</h3><p>Reconfinement majeur, neutralisation Keter, escorte de convois et défense contre les raids extérieurs.</p><div class="location">▣ Surface &amp; Cryo-Silos · S-2</div><details><summary>Unités affectées</summary><p><b>Delta-14</b> · arctique<br><b>Beta-7</b> · risques bio/chimiques<br><b>Nu-7</b> · appui lourd<br><b>Epsilon-11</b> · reconfinement d'urgence<br><b>Alpha-1</b> · garde O5 / Site-01</p></details></article>
+        <article class="dept-card" data-search="isd ia sécurité interne renseignement intelligence contre espionnage agents">
+          <div class="dept-icon">ISD</div><div class="dept-tag">NIVEAU 3–5</div><h3>ISD &amp; Agence de Renseignement</h3><p>Contre-espionnage interne, détection des infiltrés et opérations humaines sous couverture en Sibérie.</p><div class="location">▣ ISD · S-1 / IA · Surface</div><details><summary>Hiérarchie</summary><p>Entry/Associate Agent → Field/Secret Agent → Special Agent/Senior Field Officer → Supervisor/Deputy Director → <b>ISD Manager / Intelligence Director</b></p></details></article>
+        <article class="dept-card" data-search="comite ethique ethics ec omega 1 lois humanitaire classe d">
+          <div class="dept-icon">EC</div><div class="dept-tag">NIVEAU 4–5</div><h3>Comité d'Éthique</h3><p>Supervision morale des tests, intégrité humanitaire des Classe-D et veto d'urgence.</p><div class="location">▣ Bureau d'Inspection · S-1</div><details><summary>Force d'exécution</summary><p><b>FIM Omega-1 “Law's Left Hand”</b></p></details></article>
+        <article class="dept-card" data-search="classe d cd cellules cdc experimentations rangs">
+          <div class="dept-icon">CD</div><div class="dept-tag">NIVEAU 0</div><h3>Personnel de Classe-D</h3><p>Sujets d'expérimentation affectés aux manipulations d'anomalies dangereuses.</p><div class="location">▣ Blocs Aleph &amp; Daleth · CDC · S-1</div><details><summary>Rangs</summary><p>Class-D → Dedicated Class-D → Adept Class-D → Advanced Class-D → Veteran Class-D</p></details></article>
+      </div>
+      <div id="noResults" class="no-results" hidden>Aucun département ne correspond à la recherche.</div>
+    </section>
+
+    <section class="content-section" id="factions">
+      <div class="section-heading">
+        <div><span class="eyebrow">04 // MENACES EXTÉRIEURES</span><h2>Factions &amp; acteurs hostiles</h2></div>
+        <p>Les forces hors-site sont suivies par l'ISD et l'IA. Les protocoles de réponse sont déclenchés selon la menace.</p>
+      </div>
+      <div class="faction-grid">
+        <article class="faction-card hostile"><div class="faction-code">CI</div><span class="faction-status">HOSTILE / PRIORITÉ 01</span><h3>Chaos Insurgency</h3><p>Faction paramilitaire ennemie principale. Raids de surface, infiltrations, libération des Classe-D, pillage de paratechnologie et sabotage du Réacteur Gen-V.</p><div class="faction-detail"><b>Base :</b> FOB clandestine en forêt sibérienne<br><b>Hiérarchie :</b> Conscript → Senior Conscript → Alpha → Beta → Delta → Cell Agent → Cell Director → Delta Command → Gamma Command → <b>The Engineer</b></div></article>
+        <article class="faction-card danger"><div class="faction-code">GRU-P</div><span class="faction-status">RÉSIDUS / INFILTRATION</span><h3>Division « P » du GRU</h3><p>Ancienne organisation soviétique. Les cellules résiduelles cherchent à pénétrer le Niveau S-1 afin de récupérer documents et artefacts contenus dans les archives.</p><div class="faction-detail"><b>Zone d'intérêt :</b> Coffre des Archives GRU-P · S-1</div></article>
+        <article class="faction-card neutral"><div class="faction-code">GOC</div><span class="faction-status">TIERS-PARTIE / NEUTRE</span><h3>Global Occult Coalition</h3><p>Faction armée tierce appliquant une neutralité stricte. Elle peut intervenir pour détruire les SCPs si la Fondation perd le contrôle du Site-95.</p><div class="faction-detail"><b>Doctrine RP :</b> observation → évaluation → intervention conditionnelle</div></article>
+      </div>
+    </section>
+
+    <section class="content-section" id="levels">
+      <div class="section-heading">
+        <div><span class="eyebrow">05 // ARCHITECTURE</span><h2>Cartographie des 3 niveaux</h2></div>
+        <p>Structure simplifiée du complexe. Sélectionne un niveau pour afficher ses zones principales.</p>
+      </div>
+      <div class="levels-layout">
+        <div class="level-list">
+          <button class="level-btn active" data-level="1"><span>S-URF</span><strong>NIVEAU 1</strong><small>Surface &amp; extérieur</small></button>
+          <button class="level-btn" data-level="2"><span>S-1</span><strong>NIVEAU 2</strong><small>Main Hub &amp; vie du site</small></button>
+          <button class="level-btn" data-level="3"><span>S-2</span><strong>NIVEAU 3</strong><small>Zone sécurisée</small></button>
+        </div>
+        <div class="level-display">
+          <div class="level-display-top"><div><span id="levelCode">NIVEAU 1 // SURFACE</span><h3 id="levelTitle">SURFACE &amp; UNITÉS EXTÉRIEURES</h3></div><span class="map-id">MAP-95-01</span></div>
+          <div id="level1" class="level-content active"><div class="zone-list"><div><b>01</b><span>Station météorologique « Boreal-9 »</span></div><div><b>02</b><span>Caserne &amp; QG tactique FIM</span></div><div><b>03</b><span>Postes IA &amp; checkpoints routiers</span></div><div><b>04</b><span>Forêt / base clandestine CI</span></div><div><b>05</b><span>Tunnel de liaison vers Site-01 · Sas Alpha-1</span></div></div><div class="schematic surface"><span class="node n1">BOREAL-9</span><span class="node n2">FIM HQ</span><span class="node n3">IA</span><span class="node n4">CI</span><span class="node n5">ALPHA-1 → 01</span></div></div>
+          <div id="level2" class="level-content"><div class="zone-list"><div><b>01</b><span>Grand Atrium Central &amp; Cafétéria</span></div><div><b>02</b><span>Postes SD &amp; Armurerie interne</span></div><div><b>03</b><span>Bloc Classe-D (CDC) &amp; Sas Ligne Rouge</span></div><div><b>04</b><span>AD, EC &amp; ISD</span></div><div><b>05</b><span>Infirmerie Centrale MD</span></div><div><b>06</b><span>Labos ScD A/B/C &amp; Archives GRU-P</span></div></div><div class="schematic mainhub"><span class="node n1">ATRIUM</span><span class="node n2">SD</span><span class="node n3">CDC</span><span class="node n4">AD/EC/ISD</span><span class="node n5">MD</span><span class="node n6">ScD / GRU-P</span></div></div>
+          <div id="level3" class="level-content"><div class="zone-list"><div><b>01</b><span>Confinement des anomalies · Safe / Euclid</span></div><div><b>02</b><span>Cryo-Silos Keter · −50°C à −100°C</span></div><div><b>03</b><span>Réacteur énergétique Gen-V</span></div><div><b>04</b><span>Service Technique</span></div><div><b>05</b><span>Silo de l'Ogive Thermonucléaire Alpha · Code Noir</span></div></div><div class="schematic deep"><span class="node n1">SAFE</span><span class="node n2">EUCLID</span><span class="node n3">CRYO-K</span><span class="node n4">GEN-V</span><span class="node n5">CODE NOIR</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section alerts-section" id="alerts">
+      <div class="section-heading">
+        <div><span class="eyebrow">06 // RÉPONSE AUX INCIDENTS</span><h2>Protocoles d'urgence</h2></div>
+        <p>Le système d'alerte du Site-95 centralise la réponse sécurité, FIM et commandement.</p>
+      </div>
+      <div class="alert-grid">
+        <article class="alert-card green"><div class="alert-number">01</div><div><span>CODE VERT</span><h3>NOMINAL</h3><p>Situation sous contrôle. Activités et expérimentations autorisées.</p></div></article>
+        <article class="alert-card yellow"><div class="alert-number">02</div><div><span>CODE JAUNE</span><h3>ALERTE CDC / ÉMEUTE</h3><p>Verrouillage automatique du Bloc Classe-D par le Département de Sécurité.</p></div></article>
+        <article class="alert-card orange"><div class="alert-number">03</div><div><span>CODE ROUGE</span><h3>BRÈCHE MAJEURE / RAID</h3><p>Fermeture des sas étanches et déploiement immédiat des unités FIM depuis la surface.</p></div></article>
+        <article class="alert-card red"><div class="alert-number">04</div><div><span>CODE NOIR</span><h3>DERNIER RECOURS</h3><p>Activation à double clé O5 de l'Ogive Thermonucléaire Alpha et annihilation thermique du complexe souterrain.</p></div></article>
+      </div>
+      <div class="emergency-console">
+        <div class="console-head"><span>●</span> CONSOLE D'ALERTE // LIVE</div>
+        <div class="console-body"><p>&gt; SITE-95 SECURITY DAEMON READY</p><p>&gt; PRIMARY CHANNEL: ISD / SD / FIM</p><p>&gt; STATUS: <b>NOMINAL</b></p><p>&gt; LAST SYSTEM CHECK: <span id="liveTime">--:--:--</span></p><p class="cursor">&gt;_</p></div>
+      </div>
+    </section>
+
+    <section class="notice">
+      <div class="notice-icon">!</div>
+      <div><strong>AVERTISSEMENT DE SÉCURITÉ</strong><p>Toute consultation non autorisée est enregistrée et peut être interceptée par le Département de Sécurité Interne (ISD).</p></div>
+      <span class="notice-code">ISD / AUDIT ACTIVE</span>
+    </section>
+
+    <footer class="footer">
+      <div><b>SITE-95</b><span>Documentation RP · Commandement de la Fondation</span></div>
+      <div><span>CLASSIFICATION : RESTREINTE</span><span>© SCP FOUNDATION // INTERNAL USE</span></div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
