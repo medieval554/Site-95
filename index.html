@@ -1,251 +1,4568 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#090c12" />
-  <meta name="description" content="Dossier officiel du Site-95 — Complexe Souterrain de Confinement et de Recherche Cryo-Anomalique 95." />
-  <title>SITE-95 // DOSSIER DE COMMANDEMENT</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Wiki et manuel officiel du Site-95 — Fondation SCP"
+    >
+
+    <title>SITE-95 // FOUNDATION DATABASE</title>
+
+    <style>
+        /* =========================================================
+           SITE-95 — FOUNDATION DATABASE
+           CSS complet — aucun fichier externe nécessaire
+           ========================================================= */
+
+        :root {
+            --bg: #0b0c10;
+            --bg-soft: #101219;
+            --panel: #13161d;
+            --panel-2: #181c24;
+
+            --border: rgba(69, 243, 255, 0.16);
+            --border-strong: rgba(69, 243, 255, 0.35);
+
+            --cyan: #45f3ff;
+            --cyan-soft: rgba(69, 243, 255, 0.08);
+
+            --red: #ff4757;
+            --red-soft: rgba(255, 71, 87, 0.10);
+
+            --gold: #ffa500;
+            --gold-soft: rgba(255, 165, 0, 0.10);
+
+            --green: #2ed573;
+            --green-soft: rgba(46, 213, 115, 0.10);
+
+            --yellow: #f7d154;
+            --yellow-soft: rgba(247, 209, 84, 0.10);
+
+            --text: #eef2f5;
+            --text-soft: #aab3bd;
+            --text-muted: #68727e;
+
+            --sidebar-width: 280px;
+            --header-height: 72px;
+
+            --radius: 14px;
+            --transition: 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(69, 243, 255, 0.06),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at bottom left,
+                    rgba(255, 71, 87, 0.04),
+                    transparent 35%
+                ),
+                var(--bg);
+
+            color: var(--text);
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            overflow-x: hidden;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================================================
+           BACKGROUND GRID
+           ========================================================= */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.015) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.015) 1px,
+                    transparent 1px
+                );
+
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* =========================================================
+           SIDEBAR
+           ========================================================= */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+
+            width: var(--sidebar-width);
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(19, 22, 29, 0.97),
+                    rgba(10, 11, 15, 0.98)
+                );
+
+            border-right: 1px solid var(--border);
+
+            backdrop-filter: blur(18px);
+
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 22px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .scp-logo {
+            width: 44px;
+            height: 44px;
+
+            display: grid;
+            place-items: center;
+
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+
+            border-radius: 50%;
+
+            font-size: 14px;
+            font-weight: 900;
+
+            box-shadow:
+                0 0 18px rgba(69, 243, 255, 0.16);
+
+            position: relative;
+        }
+
+        .scp-logo::after {
+            content: "";
+            position: absolute;
+
+            inset: 5px;
+
+            border: 1px dashed
+                rgba(69, 243, 255, 0.5);
+
+            border-radius: 50%;
+        }
+
+        .brand {
+            min-width: 0;
+        }
+
+        .brand h1 {
+            font-size: 14px;
+            letter-spacing: 0.18em;
+            color: var(--cyan);
+        }
+
+        .brand span {
+            display: block;
+
+            margin-top: 3px;
+
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+
+            color: var(--text-muted);
+        }
+
+        .clearance-box {
+            margin-top: 18px;
+
+            padding: 11px 12px;
+
+            background: var(--gold-soft);
+
+            border: 1px solid
+                rgba(255, 165, 0, 0.24);
+
+            border-radius: 10px;
+
+            font-size: 10px;
+            line-height: 1.5;
+
+            color: var(--gold);
+
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .nav {
+            padding: 15px 10px 30px;
+        }
+
+        .nav-title {
+            padding: 10px 10px 8px;
+
+            color: var(--text-muted);
+
+            font-size: 9px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 0.17em;
+        }
+
+        .nav-link {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 11px 12px;
+            margin-bottom: 4px;
+
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 10px;
+
+            color: var(--text-soft);
+
+            text-align: left;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            background: rgba(69, 243, 255, 0.05);
+            color: var(--text);
+        }
+
+        .nav-link.active {
+            color: var(--cyan);
+
+            background: var(--cyan-soft);
+
+            border-color:
+                rgba(69, 243, 255, 0.18);
+
+            box-shadow:
+                inset 3px 0 0 var(--cyan);
+        }
+
+        .nav-icon {
+            width: 22px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .nav-text {
+            font-size: 13px;
+            flex: 1;
+        }
+
+        /* =========================================================
+           MAIN
+           ========================================================= */
+
+        .main {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+        }
+
+        /* =========================================================
+           HEADER
+           ========================================================= */
+
+        .topbar {
+            height: var(--header-height);
+
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            padding: 0 24px;
+
+            position: sticky;
+            top: 0;
+
+            background:
+                rgba(11, 12, 16, 0.83);
+
+            backdrop-filter: blur(18px);
+
+            border-bottom:
+                1px solid var(--border);
+
+            z-index: 900;
+        }
+
+        .menu-toggle {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid var(--border);
+            background: var(--panel);
+
+            color: var(--cyan);
+            border-radius: 10px;
+        }
+
+        .breadcrumb {
+            flex: 1;
+
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .breadcrumb strong {
+            color: var(--cyan);
+        }
+
+        .search {
+            width: min(360px, 40vw);
+            position: relative;
+        }
+
+        .search input {
+            width: 100%;
+
+            padding: 11px 42px 11px 14px;
+
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            outline: none;
+
+            color: var(--text);
+            font-size: 12px;
+
+            transition: var(--transition);
+        }
+
+        .search input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search input:focus {
+            border-color: var(--border-strong);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(69, 243, 255, 0.05);
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            right: 13px;
+
+            transform: translateY(-50%);
+
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .search-results {
+            position: absolute;
+
+            top: calc(100% + 7px);
+            left: 0;
+            right: 0;
+
+            padding: 6px;
+
+            background: rgba(19, 22, 29, 0.98);
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,0.45);
+
+            display: none;
+
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-results.visible {
+            display: block;
+        }
+
+        .search-result {
+            width: 100%;
+
+            padding: 10px;
+
+            text-align: left;
+
+            color: var(--text-soft);
+
+            background: transparent;
+
+            border: 0;
+            border-radius: 8px;
+
+            font-size: 11px;
+        }
+
+        .search-result:hover {
+            color: var(--cyan);
+            background: var(--cyan-soft);
+        }
+
+        .search-empty {
+            padding: 12px;
+            text-align: center;
+
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* =========================================================
+           PAGE CONTAINER
+           ========================================================= */
+
+        .content {
+            width: min(1400px, 100%);
+            margin: 0 auto;
+
+            padding: 28px;
+        }
+
+        .page {
+            display: none;
+
+            animation:
+                pageIn 0.28s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes pageIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================================
+           HERO
+           ========================================================= */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+
+            min-height: 420px;
+
+            display: flex;
+            align-items: flex-end;
+
+            padding: 42px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(69, 243, 255, 0.08),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    315deg,
+                    rgba(255, 71, 87, 0.07),
+                    transparent 40%
+                ),
+                var(--panel);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 20px 80px
+                rgba(0,0,0,0.25);
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 600px;
+            height: 600px;
+
+            top: -300px;
+            right: -150px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(69,243,255,0.14),
+                    transparent 65%
+                );
+
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: "95";
+
+            position: absolute;
+
+            right: 42px;
+            bottom: 20px;
+
+            font-size: clamp(130px, 20vw, 260px);
+            font-weight: 900;
+
+            line-height: 1;
+
+            color:
+                rgba(255,255,255,0.025);
+
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+
+            max-width: 800px;
+        }
+
+        .status-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-bottom: 14px;
+
+            font-size: 10px;
+
+            color: var(--green);
+
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            background: currentColor;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 10px currentColor;
+        }
+
+        .hero h2 {
+            font-size: clamp(42px, 7vw, 82px);
+
+            line-height: 0.95;
+
+            letter-spacing: -0.06em;
+
+            margin-bottom: 18px;
+        }
+
+        .hero h2 span {
+            color: var(--cyan);
+        }
+
+        .hero p {
+            max-width: 680px;
+
+            color: var(--text-soft);
+
+            line-height: 1.75;
+
+            font-size: 14px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 10px;
+
+            margin-top: 26px;
+
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 11px 15px;
+
+            border-radius: 10px;
+
+            border: 1px solid var(--border-strong);
+
+            background: rgba(69,243,255,0.07);
+
+            color: var(--cyan);
+
+            font-size: 11px;
+            font-weight: 800;
+
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+
+            background:
+                rgba(69,243,255,0.12);
+
+            box-shadow:
+                0 8px 30px
+                rgba(69,243,255,0.09);
+        }
+
+        .btn-danger {
+            color: var(--red);
+
+            background: var(--red-soft);
+
+            border-color:
+                rgba(255,71,87,0.25);
+        }
+
+        .btn-danger:hover {
+            background:
+                rgba(255,71,87,0.16);
+        }
+
+        .btn-gold {
+            color: var(--gold);
+
+            background: var(--gold-soft);
+
+            border-color:
+                rgba(255,165,0,0.25);
+        }
+
+        /* =========================================================
+           SECTION TITLES
+           ========================================================= */
+
+        .section {
+            margin-top: 28px;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 14px;
+        }
+
+        .section-heading h3 {
+            font-size: 18px;
+            letter-spacing: -0.03em;
+        }
+
+        .section-heading p {
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+
+        /* =========================================================
+           GRID / CARDS
+           ========================================================= */
+
+        .grid {
+            display: grid;
+            gap: 14px;
+        }
+
+        .grid-2 {
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+        }
+
+        .grid-4 {
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+        }
+
+        .card {
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(255,255,255,0.025),
+                    rgba(255,255,255,0.01)
+                ),
+                var(--panel);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            padding: 18px;
+
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+
+            border-color:
+                rgba(69,243,255,0.26);
+
+            box-shadow:
+                0 15px 45px
+                rgba(0,0,0,0.18);
+        }
+
+        .card-clickable {
+            cursor: pointer;
+        }
+
+        .card-icon {
+            width: 42px;
+            height: 42px;
+
+            display: grid;
+            place-items: center;
+
+            background: var(--cyan-soft);
+
+            border:
+                1px solid
+                rgba(69,243,255,0.16);
+
+            border-radius: 10px;
+
+            color: var(--cyan);
+            font-size: 17px;
+
+            margin-bottom: 12px;
+        }
+
+        .card h4 {
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .card p {
+            color: var(--text-soft);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           INFO GRID
+           ========================================================= */
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 10px;
+        }
+
+        .info-box {
+            padding: 14px;
+
+            background:
+                rgba(255,255,255,0.025);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 12px;
+        }
+
+        .info-box span {
+            display: block;
+
+            color: var(--text-muted);
+
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+
+            margin-bottom: 7px;
+        }
+
+        .info-box strong {
+            font-size: 13px;
+        }
+
+        /* =========================================================
+           BADGES / LEVELS
+           ========================================================= */
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+
+            padding: 4px 8px;
+
+            border-radius: 999px;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .level-0 {
+            background: rgba(160,160,160,0.10);
+            color: #bfc4ca;
+            border: 1px solid rgba(160,160,160,0.18);
+        }
+
+        .level-1 {
+            background: rgba(69,243,255,0.08);
+            color: #81f7ff;
+            border: 1px solid rgba(69,243,255,0.18);
+        }
+
+        .level-2 {
+            background: rgba(90,154,255,0.08);
+            color: #81b0ff;
+            border: 1px solid rgba(90,154,255,0.18);
+        }
+
+        .level-3 {
+            background: rgba(172,103,255,0.10);
+            color: #c292ff;
+            border: 1px solid rgba(172,103,255,0.18);
+        }
+
+        .level-4 {
+            background: var(--red-soft);
+            color: #ff7784;
+            border: 1px solid rgba(255,71,87,0.20);
+        }
+
+        .level-5 {
+            background: var(--gold-soft);
+            color: #ffc04a;
+            border: 1px solid rgba(255,165,0,0.22);
+        }
+
+        /* =========================================================
+           ACCREDITATION
+           ========================================================= */
+
+        .clearance-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .clearance-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 100px;
+            height: 100px;
+
+            right: -35px;
+            bottom: -35px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(69,243,255,0.11),
+                    transparent 70%
+                );
+        }
+
+        .clearance-number {
+            font-size: 30px;
+            font-weight: 900;
+
+            color: var(--cyan);
+
+            margin-bottom: 6px;
+        }
+
+        .clearance-card h4 {
+            margin-bottom: 6px;
+        }
+
+        .clearance-card p {
+            min-height: 55px;
+            margin-bottom: 11px;
+        }
+
+        /* =========================================================
+           HIERARCHY
+           ========================================================= */
+
+        .hierarchy {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .hierarchy-row {
+            display: grid;
+
+            grid-template-columns: 85px 1fr auto;
+
+            align-items: center;
+            gap: 12px;
+
+            padding: 12px 14px;
+
+            background: var(--panel);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 12px;
+
+            transition: var(--transition);
+        }
+
+        .hierarchy-row:hover {
+            border-color:
+                rgba(69,243,255,0.24);
+        }
+
+        .rank-number {
+            color: var(--cyan);
+
+            font-size: 10px;
+            font-weight: 900;
+
+            letter-spacing: 0.1em;
+        }
+
+        .hierarchy-main strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .hierarchy-main span {
+            display: block;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+
+            margin-top: 3px;
+        }
+
+        /* =========================================================
+           DEPARTMENTS
+           ========================================================= */
+
+        .department-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .department-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .department-code {
+            width: 42px;
+            height: 42px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            background: var(--cyan-soft);
+
+            border:
+                1px solid
+                rgba(69,243,255,0.18);
+
+            color: var(--cyan);
+
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .department-title h4 {
+            margin: 0;
+        }
+
+        .supervisor {
+            margin-top: 14px;
+
+            padding: 10px 12px;
+
+            border-left: 2px solid var(--gold);
+
+            background: var(--gold-soft);
+
+            color: #ffd47a;
+
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        .role-text {
+            margin-top: 14px;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 15px;
+        }
+
+        .filter-btn {
+            padding: 8px 10px;
+
+            background: rgba(255,255,255,0.025);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 9px;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            color: var(--cyan);
+
+            border-color:
+                rgba(69,243,255,0.24);
+
+            background: var(--cyan-soft);
+        }
+
+        /* =========================================================
+           ACCORDION
+           ========================================================= */
+
+        .accordion {
+            margin-top: 15px;
+        }
+
+        .accordion-item {
+            border-top:
+                1px solid var(--border);
+        }
+
+        .accordion-header {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 13px 0;
+
+            border: 0;
+            background: transparent;
+
+            color: var(--text);
+
+            text-align: left;
+
+            font-size: 12px;
+        }
+
+        .accordion-header:hover {
+            color: var(--cyan);
+        }
+
+        .accordion-arrow {
+            color: var(--text-muted);
+
+            transition: transform var(--transition);
+        }
+
+        .accordion-header.active
+        .accordion-arrow {
+            transform: rotate(180deg);
+            color: var(--cyan);
+        }
+
+        .accordion-content {
+            display: none;
+
+            padding: 0 0 14px;
+        }
+
+        .accordion-content.active {
+            display: block;
+        }
+
+        .ranks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .rank-chip {
+            padding: 6px 9px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 8px;
+
+            color: var(--text-soft);
+
+            font-size: 10px;
+        }
+
+        /* =========================================================
+           FACTIONS
+           ========================================================= */
+
+        .faction-card {
+            min-height: 220px;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faction-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 140px;
+            height: 140px;
+
+            right: -50px;
+            bottom: -50px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,71,87,0.12),
+                    transparent 70%
+                );
+        }
+
+        .faction-card.neutral::after {
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(247,209,84,0.10),
+                    transparent 70%
+                );
+        }
+
+        .faction-card h4 {
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .faction-card .status {
+            display: inline-block;
+
+            margin-bottom: 12px;
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+
+            color: var(--red);
+        }
+
+        .faction-card.neutral .status {
+            color: var(--yellow);
+        }
+
+        /* =========================================================
+           LEVELS
+           ========================================================= */
+
+        .level-card {
+            min-height: 190px;
+        }
+
+        .level-label {
+            display: inline-flex;
+            padding: 5px 8px;
+
+            border-radius: 8px;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            background: var(--cyan-soft);
+            color: var(--cyan);
+
+            border:
+                1px solid
+                rgba(69,243,255,0.17);
+        }
+
+        .level-card h4 {
+            margin: 13px 0 8px;
+            font-size: 15px;
+        }
+
+        .level-card ul {
+            list-style: none;
+        }
+
+        .level-card li {
+            padding: 5px 0;
+
+            color: var(--text-soft);
+
+            font-size: 11px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.04);
+        }
+
+        .level-card li:last-child {
+            border-bottom: 0;
+        }
+
+        .level-card li::before {
+            content: "›";
+
+            color: var(--cyan);
+
+            margin-right: 7px;
+        }
+
+        /* =========================================================
+           ALERTS
+           ========================================================= */
+
+        .alert-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0,1fr));
+
+            gap: 12px;
+        }
+
+        .alert-card {
+            position: relative;
+
+            overflow: hidden;
+
+            min-height: 220px;
+
+            padding: 18px;
+
+            background: var(--panel);
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 14px;
+
+            transition: var(--transition);
+        }
+
+        .alert-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .alert-card.green {
+            border-color:
+                rgba(46,213,115,0.24);
+        }
+
+        .alert-card.yellow {
+            border-color:
+                rgba(247,209,84,0.24);
+        }
+
+        .alert-card.red {
+            border-color:
+                rgba(255,71,87,0.24);
+        }
+
+        .alert-card.black {
+            border-color:
+                rgba(255,165,0,0.30);
+        }
+
+        .alert-indicator {
+            width: 11px;
+            height: 11px;
+
+            border-radius: 50%;
+
+            margin-bottom: 16px;
+        }
+
+        .green .alert-indicator {
+            background: var(--green);
+            box-shadow:
+                0 0 16px
+                rgba(46,213,115,0.7);
+        }
+
+        .yellow .alert-indicator {
+            background: var(--yellow);
+            box-shadow:
+                0 0 16px
+                rgba(247,209,84,0.6);
+        }
+
+        .red .alert-indicator {
+            background: var(--red);
+            box-shadow:
+                0 0 16px
+                rgba(255,71,87,0.65);
+        }
+
+        .black .alert-indicator {
+            background: var(--gold);
+            box-shadow:
+                0 0 16px
+                rgba(255,165,0,0.7);
+        }
+
+        .alert-card h4 {
+            font-size: 17px;
+            margin-bottom: 5px;
+        }
+
+        .alert-code {
+            color: var(--text-muted);
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+
+            margin-bottom: 13px;
+        }
+
+        .alert-card p {
+            color: var(--text-soft);
+
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           CODE NOIR
+           ========================================================= */
+
+        .blackout {
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,71,87,0.07),
+                    rgba(255,165,0,0.05)
+                ),
+                #110e0c;
+
+            border:
+                1px solid
+                rgba(255,165,0,0.28);
+
+            border-radius: 16px;
+        }
+
+        .blackout::before {
+            content: "CLASSIFIED";
+
+            position: absolute;
+
+            top: 25px;
+            right: -50px;
+
+            transform: rotate(12deg);
+
+            padding: 5px 60px;
+
+            border-top:
+                1px solid
+                rgba(255,71,87,0.22);
+
+            border-bottom:
+                1px solid
+                rgba(255,71,87,0.22);
+
+            color:
+                rgba(255,71,87,0.18);
+
+            font-size: 10px;
+            font-weight: 900;
+
+            letter-spacing: 0.25em;
+        }
+
+        .blackout h4 {
+            color: var(--gold);
+
+            font-size: 20px;
+
+            margin-bottom: 10px;
+        }
+
+        .blackout p {
+            max-width: 780px;
+
+            color: #c7bfb7;
+
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+
+        footer {
+            margin-top: 36px;
+
+            padding: 18px 0 5px;
+
+            border-top:
+                1px solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            color: var(--text-muted);
+
+            font-size: 10px;
+        }
+
+        .footer-warning {
+            color: var(--red);
+
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* =========================================================
+           MOBILE
+           ========================================================= */
+
+        .sidebar-overlay {
+            display: none;
+
+            position: fixed;
+            inset: 0;
+
+            background:
+                rgba(0,0,0,0.6);
+
+            z-index: 950;
+        }
+
+        @media (max-width: 1150px) {
+            .grid-4,
+            .info-grid,
+            .alert-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0,1fr));
+            }
+
+            .grid-3 {
+                grid-template-columns:
+                    repeat(2, minmax(0,1fr));
+            }
+        }
+
+        @media (max-width: 850px) {
+            .sidebar {
+                transform:
+                    translateX(-100%);
+
+                transition:
+                    transform 0.28s ease;
+            }
+
+            .sidebar.open {
+                transform:
+                    translateX(0);
+            }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .search {
+                width: min(270px, 43vw);
+            }
+
+            .hero {
+                min-height: 390px;
+                padding: 28px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .content {
+                padding: 18px;
+            }
+
+            .topbar {
+                padding: 0 14px;
+            }
+
+            .breadcrumb {
+                display: none;
+            }
+
+            .search {
+                width: 100%;
+            }
+
+            .grid-2,
+            .grid-3,
+            .grid-4,
+            .info-grid,
+            .alert-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 24px;
+                min-height: 450px;
+            }
+
+            .hero h2 {
+                font-size: 50px;
+            }
+
+            .hierarchy-row {
+                grid-template-columns: 1fr;
+                gap: 7px;
+            }
+
+            .hierarchy-row .badge {
+                justify-self: start;
+            }
+
+            footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div class="scanlines" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
 
-  <aside class="sidebar" id="sidebar">
-    <div class="brand">
-      <div class="scp-mark">SCP</div>
-      <div>
-        <strong>FOUNDATION</strong>
-        <span>COMMAND TERMINAL</span>
-      </div>
-    </div>
+    <!-- =========================================================
+         SIDEBAR
+         ========================================================= -->
 
-    <div class="access-card">
-      <div class="status-dot"></div>
-      <div>
-        <small>SESSION</small>
-        <b>NIVEAU 4+</b>
-      </div>
-      <span class="access-lock">●</span>
-    </div>
+    <aside class="sidebar" id="sidebar">
 
-    <nav class="nav" aria-label="Navigation principale">
-      <a href="#overview" class="nav-link active"><span>01</span> Aperçu</a>
-      <a href="#clearances" class="nav-link"><span>02</span> Accréditations</a>
-      <a href="#departments" class="nav-link"><span>03</span> Départements</a>
-      <a href="#factions" class="nav-link"><span>04</span> Factions</a>
-      <a href="#levels" class="nav-link"><span>05</span> Niveaux du site</a>
-      <a href="#alerts" class="nav-link"><span>06</span> Protocoles</a>
-    </nav>
+        <div class="sidebar-header">
 
-    <div class="sidebar-footer">
-      <span>DOCUMENT OFFICIEL</span>
-      <span>CLASSIFICATION : RESTREINTE</span>
-      <span>ISD MONITORING : ACTIVE</span>
-    </div>
-  </aside>
+            <div class="logo-row">
 
-  <main class="main">
-    <header class="topbar">
-      <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir la navigation">☰</button>
-      <div class="breadcrumb">SITE-95 <span>/</span> COMMANDMENT DOSSIER <span>/</span> <b>LEVEL 4</b></div>
-      <div class="top-actions">
-        <div class="signal"><span></span> LIEN SÉCURISÉ</div>
-        <button class="ghost-btn" id="printBtn">IMPRIMER</button>
-      </div>
-    </header>
+                <div class="scp-logo">
+                    SCP
+                </div>
 
-    <section class="hero" id="overview">
-      <div class="hero-copy">
-        <div class="classification"><span></span> DOCUMENT DE COMMANDEMENT — NIVEAU 4</div>
-        <p class="kicker">COMPLEXE SOUTERRAIN DE CONFINEMENT &amp; RECHERCHE</p>
-        <h1>SITE-95</h1>
-        <p class="hero-subtitle">CRYO-ANOMALIQUE // TOMSK // FÉDÉRATION DE RUSSIE</p>
-        <p class="hero-text">Forteresse souterraine spécialisée dans le confinement d'anomalies cryogéniques, d'entités humanoïdes à haut risque et l'étude de la paratechnologie soviétique issue de la Division « P » du GRU.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#departments">Explorer la structure <span>→</span></a>
-          <a class="btn secondary" href="#alerts">Consulter les urgences</a>
+                <div class="brand">
+                    <h1>SITE-95</h1>
+                    <span>Foundation Database</span>
+                </div>
+
+            </div>
+
+            <div class="clearance-box">
+                🔐 Niveau 4 requis<br>
+                Accès aux données restreintes
+            </div>
+
         </div>
-      </div>
-      <div class="hero-panel">
-        <div class="radar">
-          <div class="radar-ring r1"></div>
-          <div class="radar-ring r2"></div>
-          <div class="radar-ring r3"></div>
-          <div class="radar-sweep"></div>
-          <div class="radar-center"></div>
-          <div class="radar-label label-a">BOREAL-9</div>
-          <div class="radar-label label-b">S-1</div>
-          <div class="radar-label label-c">S-2</div>
+
+        <nav class="nav">
+
+            <div class="nav-title">
+                Base de données
+            </div>
+
+            <button
+                class="nav-link active"
+                data-page="home"
+            >
+                <span class="nav-icon">🏠</span>
+                <span class="nav-text">
+                    Accueil & Lore
+                </span>
+            </button>
+
+            <button
+                class="nav-link"
+                data-page="clearances"
+            >
+                <span class="nav-icon">🔐</span>
+                <span class="nav-text">
+                    Accréditations & Classes
+                </span>
+            </button>
+
+            <button
+                class="nav-link"
+                data-page="hierarchy"
+            >
+                <span class="nav-icon">👑</span>
+                <span class="nav-text">
+                    Hiérarchie Globale
+                </span>
+            </button>
+
+            <button
+                class="nav-link"
+                data-page="departments"
+            >
+                <span class="nav-icon">🏢</span>
+                <span class="nav-text">
+                    Départements
+                </span>
+            </button>
+
+            <button
+                class="nav-link"
+                data-page="factions"
+            >
+                <span class="nav-icon">⚔️</span>
+                <span class="nav-text">
+                    Factions Extérieures
+                </span>
+            </button>
+
+            <button
+                class="nav-link"
+                data-page="alerts"
+            >
+                <span class="nav-icon">🚨</span>
+                <span class="nav-text">
+                    Codes d'Alerte
+                </span>
+            </button>
+
+            <div class="nav-title">
+                Système
+            </div>
+
+            <button
+                class="nav-link"
+                data-page="levels"
+            >
+                <span class="nav-icon">🗺️</span>
+                <span class="nav-text">
+                    Niveaux du Site
+                </span>
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+    <!-- =========================================================
+         MAIN
+         ========================================================= -->
+
+    <main class="main">
+
+        <!-- =====================================================
+             TOPBAR
+             ===================================================== -->
+
+        <header class="topbar">
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Ouvrir le menu"
+            >
+                ☰
+            </button>
+
+            <div class="breadcrumb">
+                FOUNDATION /
+                <strong id="breadcrumbPage">
+                    SITE-95
+                </strong>
+            </div>
+
+            <div class="search">
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Rechercher dans la base..."
+                    autocomplete="off"
+                >
+
+                <span class="search-icon">
+                    🔎
+                </span>
+
+                <div
+                    class="search-results"
+                    id="searchResults"
+                ></div>
+
+            </div>
+
+        </header>
+
+        <div class="content">
+
+            <!-- =================================================
+                 PAGE : HOME
+                 ================================================= -->
+
+            <section
+                id="home"
+                class="page active"
+            >
+
+                <div class="hero">
+
+                    <div class="hero-content">
+
+                        <div class="status-line">
+                            <span class="status-dot"></span>
+                            SITE OPÉRATIONNEL
+                        </div>
+
+                        <h2>
+                            SITE-<span>95</span>
+                        </h2>
+
+                        <p>
+                            Complexe Souterrain de Confinement
+                            et de Recherche Cryo-Anomalique.
+                            Une installation sécurisée de la
+                            Fondation SCP située dans le district
+                            fédéral de Sibérie, Oblast de Tomsk.
+                        </p>
+
+                        <div class="hero-actions">
+
+                            <button
+                                class="btn"
+                                data-go="departments"
+                            >
+                                Explorer les départements
+                            </button>
+
+                            <button
+                                class="btn btn-gold"
+                                data-go="clearances"
+                            >
+                                Consulter les accréditations
+                            </button>
+
+                            <button
+                                class="btn btn-danger"
+                                data-go="alerts"
+                            >
+                                Protocoles d'urgence
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Informations -->
+
+                <div class="section">
+
+                    <div class="section-heading">
+                        <div>
+                            <h3>
+                                Fiche technique
+                            </h3>
+
+                            <p>
+                                Informations générales sur
+                                l'installation.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="info-grid">
+
+                        <div
+                            class="info-box"
+                            data-searchable
+                            data-title="Localisation du Site-95"
+                        >
+                            <span>Localisation</span>
+                            <strong>
+                                Oblast de Tomsk, Russie
+                            </strong>
+                        </div>
+
+                        <div
+                            class="info-box"
+                            data-searchable
+                            data-title="Façade civile Boreal-9"
+                        >
+                            <span>Façade civile</span>
+                            <strong>
+                                Station « Boreal-9 »
+                            </strong>
+                        </div>
+
+                        <div
+                            class="info-box"
+                            data-searchable
+                            data-title="Directeur Alexander Vance"
+                        >
+                            <span>Directeur</span>
+                            <strong>
+                                Dr. Alexander Vance
+                            </strong>
+                        </div>
+
+                        <div
+                            class="info-box"
+                            data-searchable
+                            data-title="Spécialisation cryogénique"
+                        >
+                            <span>Spécialisation</span>
+                            <strong>
+                                Cryo-anomalies
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Lore -->
+
+                <div class="section">
+
+                    <div class="section-heading">
+                        <div>
+                            <h3>
+                                Historique
+                            </h3>
+
+                            <p>
+                                Les origines du Site-95.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-2">
+
+                        <article
+                            class="card"
+                            data-searchable
+                            data-title="Origines du Site-95"
+                        >
+                            <div class="card-icon">
+                                🏗️
+                            </div>
+
+                            <h4>
+                                Origines soviétiques
+                            </h4>
+
+                            <p>
+                                Le Site-95 a été construit au
+                                début des années 1990 sur les
+                                fondations d'un ancien complexe
+                                militaire souterrain exploité
+                                par la Division « P » du GRU,
+                                spécialisée dans la
+                                psychotronique et les recherches
+                                paranormales soviétiques.
+                            </p>
+                        </article>
+
+                        <article
+                            class="card"
+                            data-searchable
+                            data-title="Site-01 Overwatch Command"
+                        >
+                            <div class="card-icon">
+                                👁️
+                            </div>
+
+                            <h4>
+                                Complexe voisin : Site-01
+                            </h4>
+
+                            <p>
+                                Un complexe hautement sécurisé
+                                situé sous la même chaîne
+                                montagneuse. Le Site-01 sert de
+                                résidence au Conseil O5 et de
+                                centre stratégique. Il est relié
+                                au Site-95 par un tunnel blindé :
+                                le Sas Alpha-1.
+                            </p>
+                        </article>
+
+                    </div>
+
+                </div>
+
+                <!-- Présentation -->
+
+                <div class="section">
+
+                    <div class="section-heading">
+                        <div>
+                            <h3>
+                                Capacités du Site
+                            </h3>
+
+                            <p>
+                                Principales fonctions opérationnelles.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-4">
+
+                        <article class="card">
+                            <div class="card-icon">❄️</div>
+
+                            <h4>
+                                Cryo-confinement
+                            </h4>
+
+                            <p>
+                                Confinement d'anomalies
+                                cryogéniques entre
+                                -50°C et -100°C.
+                            </p>
+                        </article>
+
+                        <article class="card">
+                            <div class="card-icon">🧪</div>
+
+                            <h4>
+                                Recherche
+                            </h4>
+
+                            <p>
+                                Études scientifiques et
+                                rédaction des procédures de
+                                confinement.
+                            </p>
+                        </article>
+
+                        <article class="card">
+                            <div class="card-icon">🛰️</div>
+
+                            <h4>
+                                Paratechnologie
+                            </h4>
+
+                            <p>
+                                Analyse des archives et
+                                technologies issues de
+                                la Division « P ».
+                            </p>
+                        </article>
+
+                        <article class="card">
+                            <div class="card-icon">🛡️</div>
+
+                            <h4>
+                                Défense
+                            </h4>
+
+                            <p>
+                                Protection interne et
+                                intervention tactique
+                                contre les menaces.
+                            </p>
+                        </article>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 PAGE : CLEARANCES
+                 ================================================= -->
+
+            <section
+                id="clearances"
+                class="page"
+            >
+
+                <div class="section-heading">
+                    <div>
+                        <h3>
+                            Accréditations & Classes
+                        </h3>
+
+                        <p>
+                            Système de sécurité et classification
+                            du personnel.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-3">
+
+                    <article
+                        class="card clearance-card"
+                        data-searchable
+                        data-title="Niveau 0 Unrestricted"
+                    >
+                        <div class="clearance-number">
+                            0
+                        </div>
+
+                        <h4>
+                            Unrestricted
+                        </h4>
+
+                        <p>
+                            Personnel civil de façade,
+                            maintenance générale et employés
+                            de la station météorologique.
+                        </p>
+
+                        <span class="badge level-0">
+                            Niveau 0
+                        </span>
+                    </article>
+
+                    <article
+                        class="card clearance-card"
+                        data-searchable
+                        data-title="Niveau 1 Restricted"
+                    >
+                        <div class="clearance-number">
+                            1
+                        </div>
+
+                        <h4>
+                            Restricted
+                        </h4>
+
+                        <p>
+                            Recrues, cadets et stagiaires.
+                            Connaissance limitée de l'existence
+                            des anomalies.
+                        </p>
+
+                        <span class="badge level-1">
+                            Niveau 1
+                        </span>
+                    </article>
+
+                    <article
+                        class="card clearance-card"
+                        data-searchable
+                        data-title="Niveau 2 Confidential"
+                    >
+                        <div class="clearance-number">
+                            2
+                        </div>
+
+                        <h4>
+                            Confidential
+                        </h4>
+
+                        <p>
+                            Gardes, chercheurs juniors,
+                            médecins et techniciens.
+                            Accès aux anomalies Safe et Euclid.
+                        </p>
+
+                        <span class="badge level-2">
+                            Niveau 2
+                        </span>
+                    </article>
+
+                    <article
+                        class="card clearance-card"
+                        data-searchable
+                        data-title="Niveau 3 Secret"
+                    >
+                        <div class="clearance-number">
+                            3
+                        </div>
+
+                        <h4>
+                            Secret
+                        </h4>
+
+                        <p>
+                            Chercheurs seniors, capitaines SD,
+                            agents d'élite et accès aux opérations
+                            tactiques.
+                        </p>
+
+                        <span class="badge level-3">
+                            Niveau 3
+                        </span>
+                    </article>
+
+                    <article
+                        class="card clearance-card"
+                        data-searchable
+                        data-title="Niveau 4 Top Secret"
+                    >
+                        <div class="clearance-number">
+                            4
+                        </div>
+
+                        <h4>
+                            Top Secret
+                        </h4>
+
+                        <p>
+                            Chefs de département, directeurs
+                            adjoints et direction du site.
+                        </p>
+
+                        <span class="badge level-4">
+                            Niveau 4
+                        </span>
+                    </article>
+
+                    <article
+                        class="card clearance-card"
+                        data-searchable
+                        data-title="Niveau 5 6 Cosmic Top Secret"
+                    >
+                        <div class="clearance-number">
+                            5+
+                        </div>
+
+                        <h4>
+                            Cosmic Top Secret
+                        </h4>
+
+                        <p>
+                            Conseil O5, Comité d'Éthique et
+                            haute direction de RAISA.
+                        </p>
+
+                        <span class="badge level-5">
+                            Niveau 5 / 6
+                        </span>
+                    </article>
+
+                </div>
+
+                <div class="section">
+
+                    <div class="section-heading">
+                        <div>
+                            <h3>
+                                Classes de personnel
+                            </h3>
+
+                            <p>
+                                Classification opérationnelle.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-3">
+
+                        <article
+                            class="card"
+                            data-searchable
+                            data-title="Classe D"
+                        >
+                            <h4>Classe-D</h4>
+                            <p>
+                                Sujets d'expérimentation
+                                affectés aux opérations
+                                anormales à haut risque.
+                            </p>
+                        </article>
+
+                        <article
+                            class="card"
+                            data-searchable
+                            data-title="Classe C"
+                        >
+                            <h4>Classe-C</h4>
+                            <p>
+                                Personnel standard assurant
+                                les opérations quotidiennes.
+                            </p>
+                        </article>
+
+                        <article
+                            class="card"
+                            data-searchable
+                            data-title="Classe B"
+                        >
+                            <h4>Classe-B</h4>
+                            <p>
+                                Personnel stratégique du site
+                                à évacuer en priorité lors
+                                des brèches.
+                            </p>
+                        </article>
+
+                        <article
+                            class="card"
+                            data-searchable
+                            data-title="Classe A"
+                        >
+                            <h4>Classe-A</h4>
+                            <p>
+                                Personnel vital, direction
+                                et haute administration.
+                            </p>
+                        </article>
+
+                        <article
+                            class="card"
+                            data-searchable
+                            data-title="Classe O"
+                        >
+                            <h4>Classe-O</h4>
+                            <p>
+                                Classification réservée aux
+                                membres du Conseil O5.
+                            </p>
+                        </article>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 PAGE : HIERARCHY
+                 ================================================= -->
+
+            <section
+                id="hierarchy"
+                class="page"
+            >
+
+                <div class="section-heading">
+                    <div>
+                        <h3>
+                            Hiérarchie Globale
+                        </h3>
+
+                        <p>
+                            Organisation du commandement du Site-95.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="hierarchy">
+
+                    <div
+                        class="hierarchy-row"
+                        data-searchable
+                        data-title="Conseil O5 et Comité Ethique"
+                    >
+                        <div class="rank-number">
+                            RANG 01
+                        </div>
+
+                        <div class="hierarchy-main">
+                            <strong>
+                                Conseil O5 & Comité d'Éthique
+                            </strong>
+
+                            <span>
+                                Overwatch Command / supervision supérieure
+                            </span>
+                        </div>
+
+                        <span class="badge level-5">
+                            NIVEAU 5+
+                        </span>
+                    </div>
+
+                    <div
+                        class="hierarchy-row"
+                        data-searchable
+                        data-title="Directeur du Site Alexander Vance"
+                    >
+                        <div class="rank-number">
+                            RANG 02
+                        </div>
+
+                        <div class="hierarchy-main">
+                            <strong>
+                                Directeur du Site & Directeurs
+                                de Département
+                            </strong>
+
+                            <span>
+                                Direction stratégique
+                            </span>
+                        </div>
+
+                        <span class="badge level-4">
+                            NIVEAU 4
+                        </span>
+                    </div>
+
+                    <div class="hierarchy-row">
+                        <div class="rank-number">
+                            RANG 03
+                        </div>
+
+                        <div class="hierarchy-main">
+                            <strong>
+                                Chefs d'Unité,
+                                Commandants FIM,
+                                Capitaines
+                            </strong>
+
+                            <span>
+                                Commandement opérationnel
+                            </span>
+                        </div>
+
+                        <span class="badge level-3">
+                            NIVEAU 3-4
+                        </span>
+                    </div>
+
+                    <div class="hierarchy-row">
+                        <div class="rank-number">
+                            RANG 04
+                        </div>
+
+                        <div class="hierarchy-main">
+                            <strong>
+                                Chercheurs Seniors,
+                                Agents Spéciaux,
+                                Spécialistes DIST,
+                                Médecins Chefs
+                            </strong>
+
+                            <span>
+                                Encadrement spécialisé
+                            </span>
+                        </div>
+
+                        <span class="badge level-3">
+                            NIVEAU 3
+                        </span>
+                    </div>
+
+                    <div class="hierarchy-row">
+                        <div class="rank-number">
+                            RANG 05
+                        </div>
+
+                        <div class="hierarchy-main">
+                            <strong>
+                                Gardes SD, Chercheurs,
+                                Techniciens, Opérateurs FIM,
+                                Infirmiers
+                            </strong>
+
+                            <span>
+                                Personnel opérationnel
+                            </span>
+                        </div>
+
+                        <span class="badge level-2">
+                            NIVEAU 2
+                        </span>
+                    </div>
+
+                    <div class="hierarchy-row">
+                        <div class="rank-number">
+                            RANG 06
+                        </div>
+
+                        <div class="hierarchy-main">
+                            <strong>
+                                Cadets, Internes, Stagiaires
+                            </strong>
+
+                            <span>
+                                Personnel en formation
+                            </span>
+                        </div>
+
+                        <span class="badge level-1">
+                            NIVEAU 1
+                        </span>
+                    </div>
+
+                    <div class="hierarchy-row">
+                        <div class="rank-number">
+                            RANG 07
+                        </div>
+
+                        <div class="hierarchy-main">
+                            <strong>
+                                Personnel de Classe-D
+                            </strong>
+
+                            <span>
+                                Personnel expérimental
+                            </span>
+                        </div>
+
+                        <span class="badge level-0">
+                            NIVEAU 0
+                        </span>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 PAGE : DEPARTMENTS
+                 ================================================= -->
+
+            <section
+                id="departments"
+                class="page"
+            >
+
+                <div class="section-heading">
+                    <div>
+                        <h3>
+                            Départements
+                        </h3>
+
+                        <p>
+                            Organisation, rôles et hiérarchies.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Filtres -->
+
+                <div
+                    class="filter-bar"
+                    id="departmentFilters"
+                >
+
+                    <button
+                        class="filter-btn active"
+                        data-filter="all"
+                    >
+                        Tous
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="AD"
+                    >
+                        AD
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="SD"
+                    >
+                        SD
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="ScD"
+                    >
+                        ScD
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="DIST"
+                    >
+                        DIST
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="MD"
+                    >
+                        MD
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="FIM"
+                    >
+                        FIM
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="ISD"
+                    >
+                        ISD / IA
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="EC"
+                    >
+                        EC
+                    </button>
+
+                    <button
+                        class="filter-btn"
+                        data-filter="CDC"
+                    >
+                        CDC
+                    </button>
+
+                </div>
+
+                <div
+                    class="grid grid-2"
+                    id="departmentGrid"
+                >
+
+                    <!-- AD -->
+
+                    <article
+                        class="card department"
+                        data-department="AD"
+                        data-searchable
+                        data-title="Département Administratif AD"
+                    >
+
+                        <div class="department-header">
+
+                            <div class="department-title">
+
+                                <div class="department-code">
+                                    AD
+                                </div>
+
+                                <div>
+                                    <h4>
+                                        Département Administratif
+                                    </h4>
+
+                                    <span class="badge level-4">
+                                        NIVEAU 3 → 4+
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="supervisor">
+                            👑 Supervision O5-7 — « Green »
+                        </div>
+
+                        <p class="role-text">
+                            Gestion financière, logistique
+                            administrative et direction générale
+                            du Site-95.
+                        </p>
+
+                        <div class="accordion">
+
+                            <div class="accordion-item">
+
+                                <button
+                                    class="accordion-header"
+                                >
+                                    Voir la hiérarchie
+                                    <span class="accordion-arrow">
+                                        ▼
+                                    </span>
+                                </button>
+
+                                <div class="accordion-content">
+
+                                    <div class="ranks">
+
+                                        <span class="rank-chip">
+                                            Junior Manager
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Manager
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Senior Manager
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Site Assistant Manager
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Site Manager
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Site Senior Manager
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Site Director
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- SD -->
+
+                    <article
+                        class="card department"
+                        data-department="SD"
+                        data-searchable
+                        data-title="Département de Sécurité SD"
+                    >
+
+                        <div class="department-header">
+
+                            <div class="department-title">
+
+                                <div class="department-code">
+                                    SD
+                                </div>
+
+                                <div>
+                                    <h4>
+                                        Département de Sécurité
+                                    </h4>
+
+                                    <span class="badge level-4">
+                                        NIVEAU 1 → 4
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="supervisor">
+                            👑 Supervision O5-4 — « The Ambassador »
+                        </div>
+
+                        <p class="role-text">
+                            Sécurité interne à 100 %, garde du CDC,
+                            contrôle de la Ligne Rouge et escortes
+                            armées.
+                        </p>
+
+                        <div class="accordion">
+
+                            <div class="accordion-item">
+
+                                <button
+                                    class="accordion-header"
+                                >
+                                    Voir la hiérarchie
+                                    <span class="accordion-arrow">
+                                        ▼
+                                    </span>
+                                </button>
+
+                                <div class="accordion-content">
+
+                                    <div class="ranks">
+
+                                        <span class="rank-chip">Cadet</span>
+                                        <span class="rank-chip">Private</span>
+                                        <span class="rank-chip">Corporal</span>
+                                        <span class="rank-chip">Sergeant</span>
+                                        <span class="rank-chip">Staff Sergeant</span>
+                                        <span class="rank-chip">Lieutenant</span>
+                                        <span class="rank-chip">Captain</span>
+                                        <span class="rank-chip">Major</span>
+                                        <span class="rank-chip">Colonel</span>
+                                        <span class="rank-chip">General / Chief of Security</span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- ScD -->
+
+                    <article
+                        class="card department"
+                        data-department="ScD"
+                        data-searchable
+                        data-title="Département Scientifique ScD"
+                    >
+
+                        <div class="department-header">
+
+                            <div class="department-title">
+
+                                <div class="department-code">
+                                    ScD
+                                </div>
+
+                                <div>
+                                    <h4>
+                                        Département Scientifique
+                                    </h4>
+
+                                    <span class="badge level-4">
+                                        NIVEAU 1 → 4
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="supervisor">
+                            👑 Supervision O5-6 — « The Experimenter »
+                        </div>
+
+                        <p class="role-text">
+                            Expérimentations sur les SCP, étude
+                            des artefacts du GRU-P et rédaction
+                            des PPC.
+                        </p>
+
+                        <div class="accordion">
+
+                            <div class="accordion-item">
+
+                                <button
+                                    class="accordion-header"
+                                >
+                                    Voir la hiérarchie
+                                    <span class="accordion-arrow">
+                                        ▼
+                                    </span>
+                                </button>
+
+                                <div class="accordion-content">
+
+                                    <div class="ranks">
+
+                                        <span class="rank-chip">Intern</span>
+                                        <span class="rank-chip">Trainee Researcher</span>
+                                        <span class="rank-chip">Junior Researcher</span>
+                                        <span class="rank-chip">Researcher</span>
+                                        <span class="rank-chip">Senior Researcher</span>
+                                        <span class="rank-chip">Head Researcher</span>
+                                        <span class="rank-chip">Assistant Board Director</span>
+                                        <span class="rank-chip">Board Director</span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- DIST -->
+
+                    <article
+                        class="card department"
+                        data-department="DIST"
+                        data-searchable
+                        data-title="Département des Infrastructures Services Technologies DIST"
+                    >
+
+                        <div class="department-header">
+
+                            <div class="department-title">
+
+                                <div class="department-code">
+                                    DIST
+                                </div>
+
+                                <div>
+                                    <h4>
+                                        Infrastructures, Services
+                                        & Technologies
+                                    </h4>
+
+                                    <span class="badge level-4">
+                                        NIVEAU 2 → 4
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="supervisor">
+                            👑 Supervision O5-12 — « The Contractor »
+                        </div>
+
+                        <p class="role-text">
+                            Maintenance du Réacteur Gen-V,
+                            cryo-stase, réseau électrique,
+                            confinement technique, mécanique
+                            et systèmes informatiques.
+                        </p>
+
+                        <div class="accordion">
+
+                            <div class="accordion-item">
+
+                                <button
+                                    class="accordion-header"
+                                >
+                                    Voir la hiérarchie
+                                    <span class="accordion-arrow">
+                                        ▼
+                                    </span>
+                                </button>
+
+                                <div class="accordion-content">
+
+                                    <div class="ranks">
+
+                                        <span class="rank-chip">Apprentice Technician</span>
+                                        <span class="rank-chip">Junior Engineer</span>
+                                        <span class="rank-chip">Maintenance Engineer</span>
+                                        <span class="rank-chip">Senior Systems Engineer</span>
+                                        <span class="rank-chip">Chief Engineer</span>
+                                        <span class="rank-chip">Head of DIST</span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- MD -->
+
+                    <article
+                        class="card department"
+                        data-department="MD"
+                        data-searchable
+                        data-title="Département Médical MD"
+                    >
+
+                        <div class="department-header">
+
+                            <div class="department-title">
+
+                                <div class="department-code">
+                                    MD
+                                </div>
+
+                                <div>
+                                    <h4>
+                                        Département Médical
+                                    </h4>
+
+                                    <span class="badge level-4">
+                                        NIVEAU 2 → 4
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="supervisor">
+                            👑 Supervision O5-8 — « The Accountant »
+                        </div>
+
+                        <p class="role-text">
+                            Soins chirurgicaux, examens
+                            psychiatriques, décontamination
+                            et administration des amnésiques.
+                        </p>
+
+                        <div class="accordion">
+
+                            <div class="accordion-item">
+
+                                <button
+                                    class="accordion-header"
+                                >
+                                    Voir la hiérarchie
+                                    <span class="accordion-arrow">
+                                        ▼
+                                    </span>
+                                </button>
+
+                                <div class="accordion-content">
+
+                                    <div class="ranks">
+
+                                        <span class="rank-chip">Intern</span>
+                                        <span class="rank-chip">Junior Resident</span>
+                                        <span class="rank-chip">Resident</span>
+                                        <span class="rank-chip">Senior Resident</span>
+                                        <span class="rank-chip">Chief Resident</span>
+                                        <span class="rank-chip">Fellow</span>
+                                        <span class="rank-chip">Attending Physician</span>
+                                        <span class="rank-chip">Department Head</span>
+                                        <span class="rank-chip">Medical Director</span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- FIM -->
+
+                    <article
+                        class="card department"
+                        data-department="FIM"
+                        data-searchable
+                        data-title="Forces d'Intervention Mobiles FIM MTF"
+                    >
+
+                        <div class="department-header">
+
+                            <div class="department-title">
+
+                                <div class="department-code">
+                                    FIM
+                                </div>
+
+                                <div>
+                                    <h4>
+                                        Forces d'Intervention Mobiles
+                                    </h4>
+
+                                    <span class="badge level-5">
+                                        NIVEAU 2 → 5
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="supervisor">
+                            👑 Supervision O5-3 — « The Philosopher Scientist »
+                        </div>
+
+                        <p class="role-text">
+                            Reconfinement d'urgence, opérations
+                            tactiques et défense contre les
+                            raids de surface.
+                        </p>
+
+                        <div class="accordion">
+
+                            <div class="accordion-item">
+
+                                <button
+                                    class="accordion-header"
+                                >
+                                    Voir les unités et les rangs
+                                    <span class="accordion-arrow">
+                                        ▼
+                                    </span>
+                                </button>
+
+                                <div class="accordion-content">
+
+                                    <div class="ranks">
+
+                                        <span class="rank-chip">
+                                            Recruit
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Operative
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Senior Operative
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Elite Operative
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Task Force Sergeant
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Task Force Lieutenant
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Task Force Leader / Commander
+                                        </span>
+
+                                    </div>
+
+                                    <div
+                                        class="ranks"
+                                        style="margin-top:10px"
+                                    >
+
+                                        <span class="rank-chip">
+                                            Delta-14 — Winter Wonderland
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Beta-7 — Maz Hatters
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Nu-7 — Hammer Down
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Epsilon-11 — Nine-Tailed Fox
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Alpha-1 — Red Right Hand
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- ISD / IA -->
+
+                    <article
+                        class="card department"
+                        data-department="ISD"
+                        data-searchable
+                        data-title="Sécurité Interne ISD Agence de Renseignement IA"
+                    >
+
+                        <div class="department-header">
+
+                            <div class="department-title">
+
+                                <div class="department-code">
+                                    ISD
+                                </div>
+
+                                <div>
+                                    <h4>
+                                        ISD & IA
+                                    </h4>
+
+                                    <span class="badge level-5">
+                                        NIVEAU 3 → 5
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="supervisor">
+                            👑 O5-1 « The Founder » — ISD |
+                            O5-2 « The Archivist » — IA
+                        </div>
+
+                        <p class="role-text">
+                            Contre-espionnage interne,
+                            détection des infiltrés,
+                            renseignements extérieurs et
+                            infiltration humaine.
+                        </p>
+
+                        <div class="accordion">
+
+                            <div class="accordion-item">
+
+                                <button
+                                    class="accordion-header"
+                                >
+                                    Voir la hiérarchie
+                                    <span class="accordion-arrow">
+                                        ▼
+                                    </span>
+                                </button>
+
+                                <div class="accordion-content">
+
+                                    <div class="ranks">
+
+                                        <span class="rank-chip">
+                                            Associate Agent
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Field Agent
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Special Agent
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Supervisor
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Internal Security Director
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Intelligence Director
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- EC -->
+
+                    <article
+                        class="card department"
+                        data-department="EC"
+                        data-searchable
+                        data-title="Comité d'Ethique EC"
+                    >
+
+                        <div class="department-header">
+
+                            <div class="department-title">
+
+                                <div class="department-code">
+                                    EC
+                                </div>
+
+                                <div>
+                                    <h4>
+                                        Comité d'Éthique
+                                    </h4>
+
+                                    <span class="badge level-5">
+                                        NIVEAU 4 → 5
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="supervisor">
+                            👑 Supervision O5-13 — « The Tiebreaker »
+                        </div>
+
+                        <p class="role-text">
+                            Contrôle éthique des expérimentations,
+                            maintien des normes morales et
+                            supervision des tests sur les
+                            Classe-D.
+                        </p>
+
+                        <div class="accordion">
+
+                            <div class="accordion-item">
+
+                                <button
+                                    class="accordion-header"
+                                >
+                                    Force d'exécution
+                                    <span class="accordion-arrow">
+                                        ▼
+                                    </span>
+                                </button>
+
+                                <div class="accordion-content">
+
+                                    <div class="ranks">
+
+                                        <span class="rank-chip">
+                                            FIM Omega-1
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            « Law's Left Hand »
+                                        </span>
+
+                                        <span class="rank-chip">
+                                            Président du Comité
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <!-- CDC -->
+
+                    <article
+                        class="card department"
+                        data-department="CDC"
+                        data-searchable
+                        data-title="Personnel de Classe D CDC"
+                    >
+
+                        <div class="department-header">
+
+                            <div class="department-title">
+
+                                <div class="department-code">
+                                    CDC
+                                </div>
+
+                                <div>
+                                    <h4>
+                                        Personnel de Classe-D
+                                    </h4>
+
+                                    <span class="badge level-0">
+                                        NIVEAU 0
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="supervisor">
+                            👑 Supervision O5-11 — « The Mailman »
+                        </div>
+
+                        <p class="role-text">
+                            Sujets humains utilisés dans les
+                            protocoles expérimentaux et tests
+                            anormaux.
+                        </p>
+
+                        <div class="accordion">
+
+                            <div class="accordion-item">
+
+                                <button
+                                    class="accordion-header"
+                                >
+                                    Voir les rangs
+                                    <span class="accordion-arrow">
+                                        ▼
+                                    </span>
+                                </button>
+
+                                <div class="accordion-content">
+
+                                    <div class="ranks">
+
+                                        <span class="rank-chip">Class-D</span>
+                                        <span class="rank-chip">Dedicated Class-D</span>
+                                        <span class="rank-chip">Adept Class-D</span>
+                                        <span class="rank-chip">Advanced Class-D</span>
+                                        <span class="rank-chip">Veteran Class-D</span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 PAGE : FACTIONS
+                 ================================================= -->
+
+            <section
+                id="factions"
+                class="page"
+            >
+
+                <div class="section-heading">
+                    <div>
+                        <h3>
+                            Factions Extérieures & Hostiles
+                        </h3>
+
+                        <p>
+                            Groupes opérant autour du Site-95.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-3">
+
+                    <article
+                        class="card faction-card"
+                        data-searchable
+                        data-title="Insurrection du Chaos CI"
+                    >
+
+                        <div class="card-icon">
+                            ⚔️
+                        </div>
+
+                        <span class="status">
+                            HOSTILE
+                        </span>
+
+                        <h4>
+                            Insurrection du Chaos
+                        </h4>
+
+                        <p>
+                            Faction paramilitaire ennemie
+                            opérant depuis des campements
+                            clandestins en forêt sibérienne.
+                            Ses opérations comprennent les
+                            raids de surface, l'infiltration,
+                            la libération des Classe-D et le
+                            sabotage.
+                        </p>
+
+                        <div
+                            class="ranks"
+                            style="margin-top:14px"
+                        >
+                            <span class="rank-chip">Conscript</span>
+                            <span class="rank-chip">Cell Agent</span>
+                            <span class="rank-chip">Delta Command</span>
+                            <span class="rank-chip">The Engineer</span>
+                        </div>
+
+                    </article>
+
+                    <article
+                        class="card faction-card"
+                        data-searchable
+                        data-title="Division P GRU"
+                    >
+
+                        <div class="card-icon">
+                            ☭
+                        </div>
+
+                        <span class="status">
+                            HOSTILE
+                        </span>
+
+                        <h4>
+                            Division « P » du GRU
+                        </h4>
+
+                        <p>
+                            Résidus de l'ancienne organisation
+                            soviétique. Ses cellules cherchent
+                            à pénétrer le S-1 afin de récupérer
+                            les archives et artefacts conservés
+                            dans le coffre du GRU-P.
+                        </p>
+
+                    </article>
+
+                    <article
+                        class="card faction-card neutral"
+                        data-searchable
+                        data-title="Coalition Occulte Mondiale GOC"
+                    >
+
+                        <div class="card-icon">
+                            ◈
+                        </div>
+
+                        <span class="status">
+                            NEUTRALITÉ INSTABLE
+                        </span>
+
+                        <h4>
+                            Coalition Occulte Mondiale
+                        </h4>
+
+                        <p>
+                            Force armée extérieure appliquant
+                            une politique officiellement
+                            neutre. Elle peut toutefois
+                            intervenir afin de détruire les
+                            anomalies si la Fondation perd
+                            définitivement le contrôle du site.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 PAGE : LEVELS
+                 ================================================= -->
+
+            <section
+                id="levels"
+                class="page"
+            >
+
+                <div class="section-heading">
+                    <div>
+                        <h3>
+                            Architecture & Niveaux
+                        </h3>
+
+                        <p>
+                            Disposition générale du complexe.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-3">
+
+                    <article class="card level-card">
+
+                        <span class="level-label">
+                            NIVEAU 1
+                        </span>
+
+                        <h4>
+                            Surface & Extérieur
+                        </h4>
+
+                        <ul>
+                            <li>
+                                Station météorologique Boreal-9
+                            </li>
+
+                            <li>
+                                Caserne et QG tactique FIM
+                            </li>
+
+                            <li>
+                                Armurerie lourde
+                            </li>
+
+                            <li>
+                                Héliport
+                            </li>
+
+                            <li>
+                                Postes de reconnaissance IA
+                            </li>
+
+                            <li>
+                                Checkpoints routiers
+                            </li>
+
+                            <li>
+                                Liaison sécurisée Site-01
+                            </li>
+                        </ul>
+
+                    </article>
+
+                    <article class="card level-card">
+
+                        <span class="level-label">
+                            NIVEAU 2 — S-1
+                        </span>
+
+                        <h4>
+                            Main Hub & Vie du Site
+                        </h4>
+
+                        <ul>
+                            <li>
+                                Grand Atrium Central
+                            </li>
+
+                            <li>
+                                Cafétéria
+                            </li>
+
+                            <li>
+                                Département de Sécurité
+                            </li>
+
+                            <li>
+                                Bloc Classe-D / CDC
+                            </li>
+
+                            <li>
+                                Aile administrative
+                            </li>
+
+                            <li>
+                                Bureau ISD
+                            </li>
+
+                            <li>
+                                Infirmerie centrale
+                            </li>
+
+                            <li>
+                                Laboratoires ScD
+                            </li>
+
+                            <li>
+                                Archives GRU-P
+                            </li>
+                        </ul>
+
+                    </article>
+
+                    <article class="card level-card">
+
+                        <span class="level-label">
+                            NIVEAU 3 — S-2
+                        </span>
+
+                        <h4>
+                            Zone Sécurisée
+                        </h4>
+
+                        <ul>
+                            <li>
+                                Ailes Safe & Euclid
+                            </li>
+
+                            <li>
+                                Cryo-Silos Keter
+                            </li>
+
+                            <li>
+                                Secteur -50°C à -100°C
+                            </li>
+
+                            <li>
+                                Réacteur énergétique Gen-V
+                            </li>
+
+                            <li>
+                                Service technique
+                            </li>
+
+                            <li>
+                                Silo de l'Ogive Alpha
+                            </li>
+
+                            <li>
+                                Zone Code Noir
+                            </li>
+                        </ul>
+
+                    </article>
+
+                </div>
+
+                <div class="section">
+
+                    <div class="card">
+
+                        <h4>
+                            Liaison Site-95 → Site-01
+                        </h4>
+
+                        <p style="margin-top:8px">
+                            Le tunnel de transit sécurisé,
+                            désigné <strong>Sas Alpha-1</strong>,
+                            relie le complexe souterrain du
+                            Site-95 au complexe Overwatch Command
+                            du Site-01.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 PAGE : ALERTS
+                 ================================================= -->
+
+            <section
+                id="alerts"
+                class="page"
+            >
+
+                <div class="section-heading">
+                    <div>
+                        <h3>
+                            Codes d'Alerte & Protocoles
+                        </h3>
+
+                        <p>
+                            Classification des urgences du Site-95.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="alert-grid">
+
+                    <article
+                        class="alert-card green"
+                        data-searchable
+                        data-title="Code Vert Nominal"
+                    >
+
+                        <div class="alert-indicator"></div>
+
+                        <div class="alert-code">
+                            CODE 01
+                        </div>
+
+                        <h4>
+                            Code Vert
+                        </h4>
+
+                        <p>
+                            Situation nominale.
+                            Les activités normales,
+                            les recherches et les
+                            expérimentations sont autorisées.
+                        </p>
+
+                    </article>
+
+                    <article
+                        class="alert-card yellow"
+                        data-searchable
+                        data-title="Code Jaune Emeute CDC"
+                    >
+
+                        <div class="alert-indicator"></div>
+
+                        <div class="alert-code">
+                            CODE 02
+                        </div>
+
+                        <h4>
+                            Code Jaune
+                        </h4>
+
+                        <p>
+                            Émeute ou incident au CDC.
+                            Verrouillage automatique du
+                            Bloc Classe-D et intervention
+                            du Département de Sécurité.
+                        </p>
+
+                    </article>
+
+                    <article
+                        class="alert-card red"
+                        data-searchable
+                        data-title="Code Rouge Brèche Raid"
+                    >
+
+                        <div class="alert-indicator"></div>
+
+                        <div class="alert-code">
+                            CODE 03
+                        </div>
+
+                        <h4>
+                            Code Rouge
+                        </h4>
+
+                        <p>
+                            Brèche majeure ou raid ennemi.
+                            Fermeture des sas de transit,
+                            confinement des zones et
+                            mobilisation des FIM.
+                        </p>
+
+                    </article>
+
+                    <article
+                        class="alert-card black"
+                        data-searchable
+                        data-title="Code Noir Ogive Thermonucleaire Alpha"
+                    >
+
+                        <div class="alert-indicator"></div>
+
+                        <div class="alert-code">
+                            CODE 04
+                        </div>
+
+                        <h4>
+                            Code Noir
+                        </h4>
+
+                        <p>
+                            Procédure de dernier recours.
+                            Activation de l'Ogive Thermonucléaire
+                            Alpha conformément à l'autorité
+                            O5 applicable au scénario RP.
+                        </p>
+
+                    </article>
+
+                </div>
+
+                <div class="section">
+
+                    <div class="blackout">
+
+                        <h4>
+                            ⚠ PROCÉDURE CODE NOIR
+                        </h4>
+
+                        <p>
+                            Le Code Noir représente le niveau
+                            d'urgence absolu du Site-95. Dans
+                            le cadre du lore du serveur, cette
+                            procédure entraîne l'activation de
+                            l'Ogive Thermonucléaire Alpha et
+                            l'annihilation thermique du complexe
+                            souterrain.
+                        </p>
+
+                        <div
+                            class="hero-actions"
+                            style="margin-top:18px"
+                        >
+
+                            <button
+                                class="btn btn-danger"
+                                id="simulateBlackCode"
+                            >
+                                Simuler Code Noir
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =================================================
+                 FOOTER
+                 ================================================= -->
+
+            <footer>
+
+                <div>
+                    SITE-95 / FOUNDATION DATABASE
+                </div>
+
+                <div class="footer-warning">
+                    Consultation restreinte —
+                    accès non autorisé surveillé
+                </div>
+
+            </footer>
+
         </div>
-        <div class="hero-stats">
-          <div><b>−50°C</b><span>ZONE CRYO</span></div>
-          <div><b>3</b><span>NIVEAUX</span></div>
-          <div><b>4</b><span>ACCÈS MAX SITE</span></div>
-        </div>
-      </div>
-    </section>
 
-    <section class="section-grid facts-grid">
-      <article class="fact-card accent-red">
-        <span class="fact-label">DIRECTION DU SITE</span>
-        <strong>Dr. Alexander Vance</strong>
-        <p>Site Director · Accréditation Niveau 4</p>
-      </article>
-      <article class="fact-card">
-        <span class="fact-label">FAÇADE CIVILE</span>
-        <strong>Boreal-9</strong>
-        <p>Station d'observation météorologique et géophysique russe</p>
-      </article>
-      <article class="fact-card">
-        <span class="fact-label">SITE ADJACENT</span>
-        <strong>Site-01 // Overwatch Command</strong>
-        <p>Résidence O5 et siège central de RAISA, relié par le Sas Alpha-1</p>
-      </article>
-      <article class="fact-card">
-        <span class="fact-label">ORIGINE</span>
-        <strong>Début des années 1990</strong>
-        <p>Ancien complexe souterrain de la Division « P » du GRU</p>
-      </article>
-    </section>
+    </main>
 
-    <section class="content-section" id="clearances">
-      <div class="section-heading">
-        <div>
-          <span class="eyebrow">02 // CONTRÔLE D'ACCÈS</span>
-          <h2>Accréditations &amp; personnel</h2>
-        </div>
-        <p>La circulation dans le Site-95 dépend du niveau de sécurité et de la fonction du personnel.</p>
-      </div>
+    <!-- =========================================================
+         JAVASCRIPT
+         ========================================================= -->
 
-      <div class="clearance-table-wrap">
-        <table class="data-table">
-          <thead>
-            <tr><th>Niveau</th><th>Désignation</th><th>Personnel / accès</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><span class="level-chip l0">00</span></td><td>Unrestricted</td><td>Façade civile · maintenance générale · station météo</td></tr>
-            <tr><td><span class="level-chip l1">01</span></td><td>Restricted</td><td>Recrues, cadets SD, stagiaires · connaissance des anomalies</td></tr>
-            <tr><td><span class="level-chip l2">02</span></td><td>Confidential</td><td>Gardes, chercheurs juniors, médecins, techniciens · Safe / Euclid</td></tr>
-            <tr><td><span class="level-chip l3">03</span></td><td>Secret</td><td>Chercheurs seniors, capitaines SD, commandants FIM, agents d'élite · Keter / opérations tactiques</td></tr>
-            <tr><td><span class="level-chip l4">04</span></td><td>Top Secret</td><td>Chefs de département, directeurs adjoints, directeur du site</td></tr>
-            <tr><td><span class="level-chip l5">05–06</span></td><td>Cosmic Top Secret</td><td>Conseil O5, Comité d'Éthique, haute direction RAISA · accès total</td></tr>
-          </tbody>
-        </table>
-      </div>
+    <script>
+        /* =========================================================
+           SITE-95 — JAVASCRIPT
+           Navigation, recherche, filtres, accordéons,
+           responsive menu et simulations.
+           ========================================================= */
 
-      <div class="personnel-grid">
-        <article class="mini-card"><b>Classe-D</b><span>Sujets d'expérimentation</span></article>
-        <article class="mini-card"><b>Classe-C</b><span>Personnel opérationnel standard</span></article>
-        <article class="mini-card"><b>Classe-B</b><span>Personnel stratégique à évacuer en priorité</span></article>
-        <article class="mini-card"><b>Classe-A</b><span>Personnel vital du site / O5</span></article>
-        <article class="mini-card"><b>Classe-O</b><span>Réservé au Conseil O5</span></article>
-      </div>
-    </section>
+        document.addEventListener(
+            "DOMContentLoaded",
+            () => {
 
-    <section class="content-section" id="departments">
-      <div class="section-heading split">
-        <div>
-          <span class="eyebrow">03 // STRUCTURE INTERNE</span>
-          <h2>Départements &amp; équipes</h2>
-        </div>
-        <div class="search-box">
-          <span>⌕</span><input id="deptSearch" type="search" placeholder="Rechercher un département..." autocomplete="off" />
-        </div>
-      </div>
+                /* =================================================
+                   ELEMENTS
+                   ================================================= */
 
-      <div class="command-tree">
-        <div class="tree-node top">CONSEIL O5 / COMITÉ D'ÉTHIQUE (EC)</div>
-        <div class="tree-line"></div>
-        <div class="tree-node director">DIRECTION DU SITE-95 <span>Dr. Alexander Vance</span></div>
-        <div class="tree-children">
-          <div>AD</div><div>SD</div><div>ScD</div><div>MD</div><div>ISD / IA</div><div>FIM / MTF</div><div>CDC</div>
-        </div>
-      </div>
+                const pages =
+                    document.querySelectorAll(".page");
 
-      <div class="department-grid" id="departmentGrid">
-        <article class="dept-card" data-search="administratif ad administration budget direction manager">
-          <div class="dept-icon">AD</div><div class="dept-tag">NIVEAU 3–4+</div><h3>Département Administratif</h3><p>Direction générale, budget, coordination des départements et application des politiques O5.</p><div class="location">▣ Aile Administrative · S-1</div><details><summary>Hiérarchie</summary><p>Junior Manager → Manager → Senior Manager → Site Assistant Manager → Site Manager → Site Senior Manager → <b>Site Director</b></p></details></article>
-        <article class="dept-card" data-search="securité sécurité sd gardes armurerie classe d ligne rouge">
-          <div class="dept-icon">SD</div><div class="dept-tag">NIVEAU 1–4</div><h3>Département de Sécurité</h3><p>Protection interne, CDC, Ligne Rouge, escortes armées et répression des émeutes.</p><div class="location">▣ Poste de Garde Principal &amp; Armurerie · S-1</div><details><summary>Hiérarchie</summary><p>Cadet → Private → Corporal → Sergeant → Staff Sergeant → Lieutenant → Captain → Major → Colonel → <b>General / Chief of Security</b></p></details></article>
-        <article class="dept-card" data-search="scientifique science scd chercheur laboratoire gr u p anomalies paratechnologie">
-          <div class="dept-icon">ScD</div><div class="dept-tag">NIVEAU 1–4</div><h3>Département Scientifique</h3><p>Analyse et expérimentation des anomalies, PPC et étude de la paratechnologie soviétique.</p><div class="location">▣ Labos A/B/C &amp; Archives GRU-P · S-1</div><details><summary>Hiérarchie</summary><p>Intern → Trainee Researcher → Junior Researcher → Researcher → Senior Researcher → Head Researcher → Assistant Board Director → <b>Board Director</b></p></details></article>
-        <article class="dept-card" data-search="medical md médecin infirmier chirurgie decontamination amnésiques">
-          <div class="dept-icon">MD</div><div class="dept-tag">NIVEAU 2–4</div><h3>Département Médical</h3><p>Urgences, bloc opératoire, suivi, décontamination biologique, vaccins et administration des amnésiques.</p><div class="location">▣ Infirmerie Centrale · S-1</div><details><summary>Hiérarchie</summary><p>Intern → Junior Resident → Resident → Senior Resident → Chief Resident → Fellow → Attending Physician → Department Head → <b>Medical Director</b></p></details></article>
-        <article class="dept-card" data-search="fims mtf forces intervention mobiles tactique winter wonderland maz hatters hammer down nine tailed fox alpha red right hand">
-          <div class="dept-icon">FIM</div><div class="dept-tag">NIVEAU 2–5</div><h3>Forces d'Intervention Mobiles</h3><p>Reconfinement majeur, neutralisation Keter, escorte de convois et défense contre les raids extérieurs.</p><div class="location">▣ Surface &amp; Cryo-Silos · S-2</div><details><summary>Unités affectées</summary><p><b>Delta-14</b> · arctique<br><b>Beta-7</b> · risques bio/chimiques<br><b>Nu-7</b> · appui lourd<br><b>Epsilon-11</b> · reconfinement d'urgence<br><b>Alpha-1</b> · garde O5 / Site-01</p></details></article>
-        <article class="dept-card" data-search="isd ia sécurité interne renseignement intelligence contre espionnage agents">
-          <div class="dept-icon">ISD</div><div class="dept-tag">NIVEAU 3–5</div><h3>ISD &amp; Agence de Renseignement</h3><p>Contre-espionnage interne, détection des infiltrés et opérations humaines sous couverture en Sibérie.</p><div class="location">▣ ISD · S-1 / IA · Surface</div><details><summary>Hiérarchie</summary><p>Entry/Associate Agent → Field/Secret Agent → Special Agent/Senior Field Officer → Supervisor/Deputy Director → <b>ISD Manager / Intelligence Director</b></p></details></article>
-        <article class="dept-card" data-search="comite ethique ethics ec omega 1 lois humanitaire classe d">
-          <div class="dept-icon">EC</div><div class="dept-tag">NIVEAU 4–5</div><h3>Comité d'Éthique</h3><p>Supervision morale des tests, intégrité humanitaire des Classe-D et veto d'urgence.</p><div class="location">▣ Bureau d'Inspection · S-1</div><details><summary>Force d'exécution</summary><p><b>FIM Omega-1 “Law's Left Hand”</b></p></details></article>
-        <article class="dept-card" data-search="classe d cd cellules cdc experimentations rangs">
-          <div class="dept-icon">CD</div><div class="dept-tag">NIVEAU 0</div><h3>Personnel de Classe-D</h3><p>Sujets d'expérimentation affectés aux manipulations d'anomalies dangereuses.</p><div class="location">▣ Blocs Aleph &amp; Daleth · CDC · S-1</div><details><summary>Rangs</summary><p>Class-D → Dedicated Class-D → Adept Class-D → Advanced Class-D → Veteran Class-D</p></details></article>
-      </div>
-      <div id="noResults" class="no-results" hidden>Aucun département ne correspond à la recherche.</div>
-    </section>
+                const navLinks =
+                    document.querySelectorAll(".nav-link");
 
-    <section class="content-section" id="factions">
-      <div class="section-heading">
-        <div><span class="eyebrow">04 // MENACES EXTÉRIEURES</span><h2>Factions &amp; acteurs hostiles</h2></div>
-        <p>Les forces hors-site sont suivies par l'ISD et l'IA. Les protocoles de réponse sont déclenchés selon la menace.</p>
-      </div>
-      <div class="faction-grid">
-        <article class="faction-card hostile"><div class="faction-code">CI</div><span class="faction-status">HOSTILE / PRIORITÉ 01</span><h3>Chaos Insurgency</h3><p>Faction paramilitaire ennemie principale. Raids de surface, infiltrations, libération des Classe-D, pillage de paratechnologie et sabotage du Réacteur Gen-V.</p><div class="faction-detail"><b>Base :</b> FOB clandestine en forêt sibérienne<br><b>Hiérarchie :</b> Conscript → Senior Conscript → Alpha → Beta → Delta → Cell Agent → Cell Director → Delta Command → Gamma Command → <b>The Engineer</b></div></article>
-        <article class="faction-card danger"><div class="faction-code">GRU-P</div><span class="faction-status">RÉSIDUS / INFILTRATION</span><h3>Division « P » du GRU</h3><p>Ancienne organisation soviétique. Les cellules résiduelles cherchent à pénétrer le Niveau S-1 afin de récupérer documents et artefacts contenus dans les archives.</p><div class="faction-detail"><b>Zone d'intérêt :</b> Coffre des Archives GRU-P · S-1</div></article>
-        <article class="faction-card neutral"><div class="faction-code">GOC</div><span class="faction-status">TIERS-PARTIE / NEUTRE</span><h3>Global Occult Coalition</h3><p>Faction armée tierce appliquant une neutralité stricte. Elle peut intervenir pour détruire les SCPs si la Fondation perd le contrôle du Site-95.</p><div class="faction-detail"><b>Doctrine RP :</b> observation → évaluation → intervention conditionnelle</div></article>
-      </div>
-    </section>
+                const sidebar =
+                    document.getElementById("sidebar");
 
-    <section class="content-section" id="levels">
-      <div class="section-heading">
-        <div><span class="eyebrow">05 // ARCHITECTURE</span><h2>Cartographie des 3 niveaux</h2></div>
-        <p>Structure simplifiée du complexe. Sélectionne un niveau pour afficher ses zones principales.</p>
-      </div>
-      <div class="levels-layout">
-        <div class="level-list">
-          <button class="level-btn active" data-level="1"><span>S-URF</span><strong>NIVEAU 1</strong><small>Surface &amp; extérieur</small></button>
-          <button class="level-btn" data-level="2"><span>S-1</span><strong>NIVEAU 2</strong><small>Main Hub &amp; vie du site</small></button>
-          <button class="level-btn" data-level="3"><span>S-2</span><strong>NIVEAU 3</strong><small>Zone sécurisée</small></button>
-        </div>
-        <div class="level-display">
-          <div class="level-display-top"><div><span id="levelCode">NIVEAU 1 // SURFACE</span><h3 id="levelTitle">SURFACE &amp; UNITÉS EXTÉRIEURES</h3></div><span class="map-id">MAP-95-01</span></div>
-          <div id="level1" class="level-content active"><div class="zone-list"><div><b>01</b><span>Station météorologique « Boreal-9 »</span></div><div><b>02</b><span>Caserne &amp; QG tactique FIM</span></div><div><b>03</b><span>Postes IA &amp; checkpoints routiers</span></div><div><b>04</b><span>Forêt / base clandestine CI</span></div><div><b>05</b><span>Tunnel de liaison vers Site-01 · Sas Alpha-1</span></div></div><div class="schematic surface"><span class="node n1">BOREAL-9</span><span class="node n2">FIM HQ</span><span class="node n3">IA</span><span class="node n4">CI</span><span class="node n5">ALPHA-1 → 01</span></div></div>
-          <div id="level2" class="level-content"><div class="zone-list"><div><b>01</b><span>Grand Atrium Central &amp; Cafétéria</span></div><div><b>02</b><span>Postes SD &amp; Armurerie interne</span></div><div><b>03</b><span>Bloc Classe-D (CDC) &amp; Sas Ligne Rouge</span></div><div><b>04</b><span>AD, EC &amp; ISD</span></div><div><b>05</b><span>Infirmerie Centrale MD</span></div><div><b>06</b><span>Labos ScD A/B/C &amp; Archives GRU-P</span></div></div><div class="schematic mainhub"><span class="node n1">ATRIUM</span><span class="node n2">SD</span><span class="node n3">CDC</span><span class="node n4">AD/EC/ISD</span><span class="node n5">MD</span><span class="node n6">ScD / GRU-P</span></div></div>
-          <div id="level3" class="level-content"><div class="zone-list"><div><b>01</b><span>Confinement des anomalies · Safe / Euclid</span></div><div><b>02</b><span>Cryo-Silos Keter · −50°C à −100°C</span></div><div><b>03</b><span>Réacteur énergétique Gen-V</span></div><div><b>04</b><span>Service Technique</span></div><div><b>05</b><span>Silo de l'Ogive Thermonucléaire Alpha · Code Noir</span></div></div><div class="schematic deep"><span class="node n1">SAFE</span><span class="node n2">EUCLID</span><span class="node n3">CRYO-K</span><span class="node n4">GEN-V</span><span class="node n5">CODE NOIR</span></div></div>
-        </div>
-      </div>
-    </section>
+                const menuToggle =
+                    document.getElementById("menuToggle");
 
-    <section class="content-section alerts-section" id="alerts">
-      <div class="section-heading">
-        <div><span class="eyebrow">06 // RÉPONSE AUX INCIDENTS</span><h2>Protocoles d'urgence</h2></div>
-        <p>Le système d'alerte du Site-95 centralise la réponse sécurité, FIM et commandement.</p>
-      </div>
-      <div class="alert-grid">
-        <article class="alert-card green"><div class="alert-number">01</div><div><span>CODE VERT</span><h3>NOMINAL</h3><p>Situation sous contrôle. Activités et expérimentations autorisées.</p></div></article>
-        <article class="alert-card yellow"><div class="alert-number">02</div><div><span>CODE JAUNE</span><h3>ALERTE CDC / ÉMEUTE</h3><p>Verrouillage automatique du Bloc Classe-D par le Département de Sécurité.</p></div></article>
-        <article class="alert-card orange"><div class="alert-number">03</div><div><span>CODE ROUGE</span><h3>BRÈCHE MAJEURE / RAID</h3><p>Fermeture des sas étanches et déploiement immédiat des unités FIM depuis la surface.</p></div></article>
-        <article class="alert-card red"><div class="alert-number">04</div><div><span>CODE NOIR</span><h3>DERNIER RECOURS</h3><p>Activation à double clé O5 de l'Ogive Thermonucléaire Alpha et annihilation thermique du complexe souterrain.</p></div></article>
-      </div>
-      <div class="emergency-console">
-        <div class="console-head"><span>●</span> CONSOLE D'ALERTE // LIVE</div>
-        <div class="console-body"><p>&gt; SITE-95 SECURITY DAEMON READY</p><p>&gt; PRIMARY CHANNEL: ISD / SD / FIM</p><p>&gt; STATUS: <b>NOMINAL</b></p><p>&gt; LAST SYSTEM CHECK: <span id="liveTime">--:--:--</span></p><p class="cursor">&gt;_</p></div>
-      </div>
-    </section>
+                const sidebarOverlay =
+                    document.getElementById("sidebarOverlay");
 
-    <section class="notice">
-      <div class="notice-icon">!</div>
-      <div><strong>AVERTISSEMENT DE SÉCURITÉ</strong><p>Toute consultation non autorisée est enregistrée et peut être interceptée par le Département de Sécurité Interne (ISD).</p></div>
-      <span class="notice-code">ISD / AUDIT ACTIVE</span>
-    </section>
+                const breadcrumbPage =
+                    document.getElementById("breadcrumbPage");
 
-    <footer class="footer">
-      <div><b>SITE-95</b><span>Documentation RP · Commandement de la Fondation</span></div>
-      <div><span>CLASSIFICATION : RESTREINTE</span><span>© SCP FOUNDATION // INTERNAL USE</span></div>
-    </footer>
-  </main>
+                const searchInput =
+                    document.getElementById("searchInput");
 
-  <script src="script.js"></script>
+                const searchResults =
+                    document.getElementById("searchResults");
+
+                const searchable =
+                    document.querySelectorAll(
+                        "[data-searchable]"
+                    );
+
+                const departmentCards =
+                    document.querySelectorAll(
+                        ".department"
+                    );
+
+                const filterButtons =
+                    document.querySelectorAll(
+                        "[data-filter]"
+                    );
+
+                /* =================================================
+                   NOMS DES PAGES
+                   ================================================= */
+
+                const pageNames = {
+                    home: "SITE-95",
+                    clearances: "ACCRÉDITATIONS",
+                    hierarchy: "HIÉRARCHIE",
+                    departments: "DÉPARTEMENTS",
+                    factions: "FACTIONS",
+                    levels: "NIVEAUX",
+                    alerts: "ALERTES"
+                };
+
+                /* =================================================
+                   NAVIGATION
+                   ================================================= */
+
+                function openPage(pageId) {
+
+                    const target =
+                        document.getElementById(pageId);
+
+                    if (!target) {
+                        return;
+                    }
+
+                    pages.forEach(page => {
+                        page.classList.remove("active");
+                    });
+
+                    navLinks.forEach(link => {
+                        link.classList.remove("active");
+                    });
+
+                    target.classList.add("active");
+
+                    const matchingLink =
+                        document.querySelector(
+                            `.nav-link[data-page="${pageId}"]`
+                        );
+
+                    if (matchingLink) {
+                        matchingLink.classList.add("active");
+                    }
+
+                    if (breadcrumbPage) {
+                        breadcrumbPage.textContent =
+                            pageNames[pageId] ||
+                            pageId.toUpperCase();
+                    }
+
+                    history.replaceState(
+                        null,
+                        "",
+                        "#" + pageId
+                    );
+
+                    closeMobileMenu();
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+                }
+
+                navLinks.forEach(link => {
+
+                    link.addEventListener(
+                        "click",
+                        () => {
+                            openPage(
+                                link.dataset.page
+                            );
+                        }
+                    );
+
+                });
+
+                document
+                    .querySelectorAll("[data-go]")
+                    .forEach(button => {
+
+                        button.addEventListener(
+                            "click",
+                            () => {
+                                openPage(
+                                    button.dataset.go
+                                );
+                            }
+                        );
+
+                    });
+
+                /* =================================================
+                   HASH URL
+                   ================================================= */
+
+                function loadFromHash() {
+
+                    const hash =
+                        window.location.hash
+                            .replace("#", "")
+                            .trim();
+
+                    if (
+                        hash &&
+                        document.getElementById(hash)
+                    ) {
+                        openPage(hash);
+                    } else {
+                        openPage("home");
+                    }
+                }
+
+                window.addEventListener(
+                    "hashchange",
+                    loadFromHash
+                );
+
+                /* =================================================
+                   MENU MOBILE
+                   ================================================= */
+
+                function openMobileMenu() {
+
+                    sidebar.classList.add("open");
+
+                    sidebarOverlay.classList.add(
+                        "active"
+                    );
+
+                    document.body.classList.add(
+                        "menu-open"
+                    );
+                }
+
+                function closeMobileMenu() {
+
+                    sidebar.classList.remove("open");
+
+                    sidebarOverlay.classList.remove(
+                        "active"
+                    );
+
+                    document.body.classList.remove(
+                        "menu-open"
+                    );
+                }
+
+                menuToggle.addEventListener(
+                    "click",
+                    () => {
+
+                        if (
+                            sidebar.classList.contains(
+                                "open"
+                            )
+                        ) {
+                            closeMobileMenu();
+                        } else {
+                            openMobileMenu();
+                        }
+
+                    }
+                );
+
+                sidebarOverlay.addEventListener(
+                    "click",
+                    closeMobileMenu
+                );
+
+                /* =================================================
+                   RECHERCHE
+                   ================================================= */
+
+                function normalize(text) {
+
+                    return text
+                        .toLowerCase()
+                        .normalize("NFD")
+                        .replace(
+                            /[\u0300-\u036f]/g,
+                            ""
+                        );
+                }
+
+                searchInput.addEventListener(
+                    "input",
+                    () => {
+
+                        const query =
+                            normalize(
+                                searchInput.value.trim()
+                            );
+
+                        searchResults.innerHTML = "";
+
+                        if (query.length < 2) {
+
+                            searchResults.classList.remove(
+                                "visible"
+                            );
+
+                            return;
+                        }
+
+                        let found = [];
+
+                        searchable.forEach(
+                            element => {
+
+                                const title =
+                                    element.dataset.title ||
+                                    element.textContent;
+
+                                const content =
+                                    normalize(
+                                        title +
+                                        " " +
+                                        element.textContent
+                                    );
+
+                                if (
+                                    content.includes(query)
+                                ) {
+                                    found.push({
+                                        element,
+                                        title
+                                    });
+                                }
+
+                            }
+                        );
+
+                        if (found.length === 0) {
+
+                            const empty =
+                                document.createElement(
+                                    "div"
+                                );
+
+                            empty.className =
+                                "search-empty";
+
+                            empty.textContent =
+                                "AUCUN RESULTAT";
+
+                            searchResults.appendChild(
+                                empty
+                            );
+
+                        } else {
+
+                            found
+                                .slice(0, 8)
+                                .forEach(
+                                    result => {
+
+                                        const button =
+                                            document.createElement(
+                                                "button"
+                                            );
+
+                                        button.className =
+                                            "search-result";
+
+                                        button.textContent =
+                                            result.title;
+
+                                        button.addEventListener(
+                                            "click",
+                                            () => {
+
+                                                const page =
+                                                    result.element.closest(
+                                                        ".page"
+                                                    );
+
+                                                if (page) {
+                                                    openPage(
+                                                        page.id
+                                                    );
+                                                }
+
+                                                setTimeout(
+                                                    () => {
+                                                        result.element.scrollIntoView(
+                                                            {
+                                                                behavior:
+                                                                    "smooth",
+                                                                block:
+                                                                    "center"
+                                                            }
+                                                        );
+                                                    },
+                                                    250
+                                                );
+
+                                                searchInput.value = "";
+
+                                                searchResults.classList.remove(
+                                                    "visible"
+                                                );
+
+                                            }
+                                        );
+
+                                        searchResults.appendChild(
+                                            button
+                                        );
+
+                                    }
+                                );
+
+                        }
+
+                        searchResults.classList.add(
+                            "visible"
+                        );
+
+                    }
+                );
+
+                /* =================================================
+                   FERMETURE RECHERCHE
+                   ================================================= */
+
+                document.addEventListener(
+                    "click",
+                    event => {
+
+                        if (
+                            !event.target.closest(
+                                ".search"
+                            )
+                        ) {
+
+                            searchResults.classList.remove(
+                                "visible"
+                            );
+
+                        }
+
+                    }
+                );
+
+                /* =================================================
+                   ACCORDEONS
+                   ================================================= */
+
+                document
+                    .querySelectorAll(
+                        ".accordion-header"
+                    )
+                    .forEach(button => {
+
+                        button.addEventListener(
+                            "click",
+                            () => {
+
+                                const content =
+                                    button.nextElementSibling;
+
+                                const isOpen =
+                                    content.classList.contains(
+                                        "active"
+                                    );
+
+                                content.classList.toggle(
+                                    "active",
+                                    !isOpen
+                                );
+
+                                button.classList.toggle(
+                                    "active",
+                                    !isOpen
+                                );
+
+                            }
+                        );
+
+                    });
+
+                /* =================================================
+                   FILTRE DEPARTEMENTS
+                   ================================================= */
+
+                filterButtons.forEach(
+                    button => {
+
+                        button.addEventListener(
+                            "click",
+                            () => {
+
+                                const filter =
+                                    button.dataset.filter;
+
+                                filterButtons.forEach(
+                                    btn => {
+                                        btn.classList.remove(
+                                            "active"
+                                        );
+                                    }
+                                );
+
+                                button.classList.add(
+                                    "active"
+                                );
+
+                                departmentCards.forEach(
+                                    card => {
+
+                                        const department =
+                                            card.dataset.department;
+
+                                        if (
+                                            filter === "all" ||
+                                            department === filter
+                                        ) {
+
+                                            card.style.display =
+                                                "";
+
+                                        } else {
+
+                                            card.style.display =
+                                                "none";
+
+                                        }
+
+                                    }
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+                /* =================================================
+                   SIMULATION CODE NOIR
+                   ================================================= */
+
+                const blackCodeButton =
+                    document.getElementById(
+                        "simulateBlackCode"
+                    );
+
+                if (blackCodeButton) {
+
+                    blackCodeButton.addEventListener(
+                        "click",
+                        () => {
+
+                            const confirmed =
+                                confirm(
+                                    "⚠ CODE NOIR ⚠\n\n" +
+                                    "PROCÉDURE RP DE DERNIER RECOURS.\n\n" +
+                                    "Activer la simulation d'alerte ?"
+                                );
+
+                            if (!confirmed) {
+                                return;
+                            }
+
+                            document.body.style.filter =
+                                "contrast(1.15) saturate(1.2)";
+
+                            blackCodeButton.textContent =
+                                "CODE NOIR ACTIVÉ";
+
+                            blackCodeButton.disabled =
+                                true;
+
+                            blackCodeButton.style.opacity =
+                                "0.7";
+
+                            setTimeout(
+                                () => {
+
+                                    alert(
+                                        "SITE-95 // CODE NOIR\n\n" +
+                                        "Simulation terminée.\n" +
+                                        "Le complexe revient en état nominal."
+                                    );
+
+                                    document.body.style.filter =
+                                        "";
+
+                                    blackCodeButton.textContent =
+                                        "Simuler Code Noir";
+
+                                    blackCodeButton.disabled =
+                                        false;
+
+                                    blackCodeButton.style.opacity =
+                                        "1";
+
+                                },
+                                2500
+                            );
+
+                        }
+                    );
+
+                }
+
+                /* =================================================
+                   RACCOURCI CLAVIER
+                   ================================================= */
+
+                document.addEventListener(
+                    "keydown",
+                    event => {
+
+                        /* Échap = fermer recherche/menu */
+
+                        if (
+                            event.key === "Escape"
+                        ) {
+
+                            searchInput.value = "";
+
+                            searchResults.classList.remove(
+                                "visible"
+                            );
+
+                            closeMobileMenu();
+
+                        }
+
+                        /* "/" = recherche */
+
+                        if (
+                            event.key === "/" &&
+                            document.activeElement !==
+                                searchInput
+                        ) {
+
+                            event.preventDefault();
+
+                            searchInput.focus();
+
+                        }
+
+                    }
+                );
+
+                /* =================================================
+                   DEMARRAGE
+                   ================================================= */
+
+                loadFromHash();
+
+                console.log(
+                    "%c[SITE-95]",
+                    "color:#45f3ff;font-weight:bold;font-size:18px"
+                );
+
+                console.log(
+                    "%cFOUNDATION SECURE DATABASE",
+                    "color:#aab3bd"
+                );
+
+                console.log(
+                    "%cCLEARANCE LEVEL 4 REQUIRED",
+                    "color:#ff4757;font-weight:bold"
+                );
+
+            }
+        );
+    </script>
+
 </body>
 </html>
+```
